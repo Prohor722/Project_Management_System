@@ -36,17 +36,22 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{route('teacher-student-list')}}">
+                        <a class="nav-link" aria-current="page" href="{{url('teacher/studentList')}}">
                             Students
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('teacher-groups')}}">
+                        <a class="nav-link" href="{{url('teacher/groups')}}">
                             Groups
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('teacher-tasks')}}">
+                        <a class="nav-link" href="{{url('teacher/topic')}}">
+                            Topic
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('teacher/tasks')}}">
                             Tasks
                         </a>
                     </li>

@@ -34,19 +34,20 @@
     <div class="container-fluid">
           <div class="row mt-5 g-0">
             <div class="col-md-4 offset-md-4 mt-5 shadow p-5">
-
+              <!-- Add Notice  -->
+              
               <form class="" method="post" >
                 @csrf
                 <h4 class="text-center">Log In</h4>
                 <div class="mb-3">
-                  <label class="form-label">ID</label>
+                  <label class="form-label">Email</label>
                   <input class="form-control" type="text" name="email" >
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Password</label>
                   <input class="form-control" type="password" name="password" >
                 </div>
-
+				
 				<div class="w3-container">
                   @if ($errors->any())
                     <div class="alert alert-danger">
@@ -57,8 +58,8 @@
                         </ul>
                     </div>
                   @endif
-
-				  @if(session('msg'))
+                  
+				  @if({{session('msg')}})
 					<div class="alert alert-danger">{{session('msg')}}</div>
 				  @endif
               </div>
