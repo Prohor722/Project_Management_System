@@ -6,6 +6,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\NoticeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,8 @@ Route::view('/teacher/studentList', 'teacher.studentList')->name('teacher-studen
 Route::resource('/teacher/groups', GroupController::class);
 //Topic
 Route::resource('/teacher/topic', TopicController::class);
+//Notice
+Route::resource('/teacher/notice', NoticeController::class);
 
 //tasks
 Route::view('/teacher/tasks', 'teacher.tasks')->name('teacher-tasks');
