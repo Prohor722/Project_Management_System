@@ -54,7 +54,8 @@ class TopicController extends Controller
      */
     public function show(Topic $topic)
     {
-        //
+        $topics = Topic::all();
+        return view('teacher.topicEdit',['topics'=>$topics, 'topic'=>$topic]);
     }
 
     /**
@@ -77,7 +78,14 @@ class TopicController extends Controller
      */
     public function update(Request $request, Topic $topic)
     {
-        //
+        $request->validate([
+            'topic_id'=>'required',
+            'topic_description'=>'required',
+            't_id'=>'required'
+        ]);
+
+        $topic->update($request->all());
+        return redirect('/teacher/topic');
     }
 
     /**
@@ -88,6 +96,7 @@ class TopicController extends Controller
      */
     public function destroy(Topic $topic)
     {
-        //
+        $topic->delete();
+        return redirect('/teacher/topic');
     }
 }
