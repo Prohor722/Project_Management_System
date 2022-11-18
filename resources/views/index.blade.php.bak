@@ -35,7 +35,7 @@
           <div class="row mt-5 g-0">
             <div class="col-md-4 offset-md-4 mt-5 shadow p-5">
               <!-- Add Notice  -->
-              
+
               <form class="" method="post" >
                 @csrf
                 <h4 class="text-center">Log In</h4>
@@ -47,7 +47,7 @@
                   <label class="form-label">Password</label>
                   <input class="form-control" type="password" name="password" >
                 </div>
-				
+
 				<div class="w3-container">
                   @if ($errors->any())
                     <div class="alert alert-danger">
@@ -58,12 +58,12 @@
                         </ul>
                     </div>
                   @endif
-                  
+
 				  @if({{session('msg')}})
 					<div class="alert alert-danger">{{session('msg')}}</div>
 				  @endif
               </div>
-                <input type="submit" class="btn btn-primary" name="signIn" value="Sign In">
+                <input type="submit" class="btn btn-info" name="signIn" value="Sign In">
               </form>
             </div>
           </div>

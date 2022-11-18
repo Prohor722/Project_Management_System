@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="col-md-9 py-3 px-5 bg bg-warning">
+        <div class="col-md-9 py-3 px-5 bg  ">
 
             <!-- Add teacher inputs  -->
             <form>
@@ -44,7 +44,7 @@
                         <label for="id" class="form-label">Password</label>
                         <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
 
-                        <button type="submit" class="btn btn-primary mt-5 w-100">Submit</button>
+                        <button type="submit" class="btn btn-info mt-5 w-100">Submit</button>
                     </div>
                 </div>
             </form>

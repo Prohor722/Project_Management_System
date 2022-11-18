@@ -12,7 +12,7 @@
                     <p>{{$error}}</p>
             @endforeach
             <!-- Add group  -->
-                <form class="" action="/teacher/topic/{{$topic->id}}" method="POST">
+                <form class="mb-5 pb-5" action="/teacher/topic/{{$topic->id}}" method="POST">
                     @method('put')
                     @csrf
                     <h4 class="mb-3 text-center">Edit Topic</h4>
@@ -29,13 +29,13 @@
                         <input type="text" class="form-control" name="t_id" value="{{old('t_id',$topic->t_id)}}">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-success">Update</button>
                 </form>
 
 
 
             </div>
-            <div class="col-md-9 bg bg-warning py-3 right-container">
+            <div class="col-md-9 bg   py-3 right-container">
 
             {{--                <!-- Search bar  -->--}}
             {{--                <form class="d-flex align-items-center ms-auto mb-1" id="search">--}}
@@ -62,7 +62,7 @@
                             <td>{{$topic->t_id}}</td>
                             <td class="d-flex">
                                 <a href="{{url('/teacher/topic/'.$topic->id)}}" class="">
-                                    <button class="btn btn-primary me-1">Edit</button>
+                                    <button class="btn btn-info me-1">Edit</button>
                                 </a>
                                 <form action="/teacher/topic/{{$topic->id}}" method="POST">
                                     @method('delete')

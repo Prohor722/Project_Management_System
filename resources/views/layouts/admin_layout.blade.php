@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin</title>
     <!-- Custom CSS  -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <!-- Bootstrap CSS  -->
@@ -43,16 +43,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('admin-teachers')}}">
                             Teachers
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('add-teacher')}}">
-                            Add Teacher
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('add-student')}}">
-                            Add Student
                         </a>
                     </li>
                     <li class="nav-item">

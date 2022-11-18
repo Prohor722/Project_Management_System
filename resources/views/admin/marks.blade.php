@@ -4,7 +4,7 @@
 
     <div class="row g-0">
 
-        <div class="py-3 px-5 bg bg-warning">
+        <div class="py-3 px-5 bg  ">
 
             <!-- Search bar  -->
             <form class="d-flex align-items-center ms-auto my-5 pb-5 w-50" id="search">

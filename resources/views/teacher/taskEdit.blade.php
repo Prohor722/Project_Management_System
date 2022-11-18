@@ -12,26 +12,28 @@
                     <p>{{$error}}</p>
                 @endforeach
 
-                <form class="" action="/teacher/tasks" method="POST">
-                    <h4 class="mb-3 text-center">Add Task</h4>
+                <form class="" action="/teacher/tasks/{{$task->id}}" method="POST">
+                    @method("put")
                     @csrf
+                    <h4 class="mb-3 text-center">Edit Task</h4>
                     <div class="mb-3">
                         <label for="taskTitle" class="form-label">Task Title</label>
-                        <input type="text" name="task_title" class="form-control" id="taskTitle" aria-describedby="emailHelp">
+                        <input type="text" value="{{old('task_title',$task->task_title)}}" name="task_title" class="form-control" id="taskTitle" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea type="text" name="task_description" class="form-control" id="description" aria-describedby="emailHelp"></textarea>
+                        <textarea type="text" name="task_description" class="form-control" id="description" aria-describedby="emailHelp">{{old('task_description',$task->task_description)}}
+                        </textarea>
                     </div>
                     <div class="mb-3">
                         <label for="courseCode" class="form-label">Course Code</label>
-                        <input type="text" name="course_code" class="form-control" id="courseCode">
+                        <input type="text" value="{{old('course_code',$task->course_code)}}" name="course_code" class="form-control" id="courseCode">
                     </div>
                     <div class="mb-3">
                         <label for="deadline" class="form-label">Deadline</label>
-                        <input type="date" name="deadline" class="form-control" id="deadline">
+                        <input type="date" value="{{old('deadline',$task->deadline)}}" name="deadline" class="form-control" id="deadline">
                     </div>
-                    <button type="submit" class="btn btn-info">Submit</button>
+                    <button type="submit" class="btn btn-success">Update</button>
                 </form>
 
                 <!-- Previous Task  -->

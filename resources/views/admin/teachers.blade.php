@@ -4,8 +4,8 @@
     <div class="row g-0">
 
         <!-- Teacher Information Section  -->
-        <div class="col-md-3 d-flex flex-column  align-items-center p-3 short-text mt-5">
-            <img id="info-img" class="my-3 w-50" src="{{asset('/images/users/Teacher.jpg')}}">
+        <div class="col-md-3 bg-light d-flex flex-column  align-items-center p-3 short-text">
+            <img id="info-img" class="mb-3 mt-5 w-50" src="{{asset('/images/users/Teacher.jpg')}}">
             <h3>Teacher's Information</h3>
             <h6 class="mt-3">Name: <span id="student-name">Roktakin ahmed jobin bhuiyan</span></h6>
             <div>
@@ -27,13 +27,21 @@
         </div>
 
 
-        <div class="bg bg-warning col-md-9 py-3 px-5">
+        <div class="bg   col-md-9 py-3 px-5">
 
-            <!-- Search bar  -->
-            <form class="d-flex align-items-center ms-auto my-5 w-50" id="search">
-                <input class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn border-0 text-dark p-0 bg-white" id="search-icon" type="submit"><i class="fas fa-search"></i></button>
-            </form>
+            {{-- Add Teacher Button  --}}
+            <div class="d-flex align-items-center">
+                <a href="{{route('add-teacher')}}">
+                    <button class="btn btn-info">Add Teacher</button>
+                </a>
+
+                <!-- Search bar  -->
+                <form class="d-flex align-items-center ms-auto my-5 w-50 border rounded-pill" id="search">
+                    <input class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn border-0 text-dark p-0 bg-white" id="search-icon" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
 
             <!-- Teachers list  -->
 

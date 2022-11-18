@@ -6,13 +6,11 @@
         <div class="row">
             <div class="col-md-3 bg bg-light py-5 left-container">
 
-
-
-                @foreach($errors->all() as $error)
-                    <p>{{$error}}</p>
+            @foreach($errors->all() as $error)
+                <p>{{$error}}</p>
             @endforeach
             <!-- Add group  -->
-                <form class="" action="/teacher/topic" method="POST">
+                <form class="mb-5 pb-5" action="/teacher/topic" method="POST">
                     @csrf
                     <h4 class="mb-3 text-center">Add Topic</h4>
                     <div class="mb-3">
@@ -28,13 +26,13 @@
                         <input type="text" class="form-control" name="t_id" value="{{old('t_id')}}">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-info">Submit</button>
                 </form>
 
 
 
             </div>
-            <div class="col-md-9 bg bg-warning py-3 right-container">
+            <div class="col-md-9 bg   py-3 right-container">
 
 {{--                <!-- Search bar  -->--}}
 {{--                <form class="d-flex align-items-center ms-auto mb-1" id="search">--}}
@@ -54,23 +52,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($topics as $topic)
-                            <tr>
-                                <td>{{$topic->topic_id}}</td>
-                                <td>{{$topic->topic_description}}</td>
-                                <td>{{$topic->t_id}}</td>
-                                <td class="d-flex">
-                                    <a href="{{url('/teacher/topic/'.$topic->id)}}" class="">
-                                        <button class="btn btn-primary me-1">Edit</button>
-                                    </a>
-                                    <form action="/teacher/topic/{{$topic->id}}" method="POST">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                            @foreach($topics as $topic)
+                                <tr>
+                                    <td>{{$topic->topic_id}}</td>
+                                    <td>{{$topic->topic_description}}</td>
+                                    <td>{{$topic->t_id}}</td>
+                                    <td class="d-flex">
+                                        <a href="{{url('/teacher/topic/'.$topic->id)}}" class="">
+                                            <button class="btn btn-info me-1">Edit</button>
+                                        </a>
+                                        <form action="/teacher/topic/{{$topic->id}}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
 
                         </tbody>
                     </table>

@@ -7,7 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\NoticeController;
-
+use App\Http\Controllers\TaskController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,12 +19,12 @@ use App\Http\Controllers\NoticeController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 //Common Routes
-Route::get('/login', [LoginController::class,'index'])->name('login.index');
+Route::get('/', [LoginController::class,'index'])->name('login.index');
 Route::post('/login', [LoginController::class,'verify'])->name('login.verify');
 Route::get('/logout', [LogoutController::class,'index'])->name('logout.index');
 
@@ -48,9 +48,9 @@ Route::resource('/teacher/groups', GroupController::class);
 Route::resource('/teacher/topic', TopicController::class);
 //Notice
 Route::resource('/teacher/notice', NoticeController::class);
-
 //tasks
-Route::view('/teacher/tasks', 'teacher.tasks')->name('teacher-tasks');
+Route::resource('/teacher/tasks', TaskController::class);
+
 
 //Student Routes
 Route::get('/student', 'App\Http\Controllers\StudentController@index')->name('student.index');

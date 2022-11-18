@@ -23,11 +23,11 @@
 {{--                        <label for="exampleInputPassword1" class="form-label">Deadline</label>--}}
 {{--                        <input type="date" class="form-control" id="exampleInputPassword1">--}}
 {{--                    </div>--}}
-{{--                    <button type="submit" class="btn btn-primary">Submit</button>--}}
+{{--                    <button type="submit" class="btn btn-info">Submit</button>--}}
 {{--                </form>--}}
 
             </div>
-            <div class="col-md-9 bg bg-warning py-5 right-container">
+            <div class="col-md-9 bg   py-5 right-container">
                 <div class="ms-auto">
                     <a class="btn btn-dark m-2" href="https://google.com">New</a>
                 </div>
@@ -46,7 +46,7 @@
                         <td>CSE-0400</td>
                         <td>Next Class for saturday will be poswond and extra class time will be nitified later</td>
                         <td>
-                            <a class="btn btn-primary" href="https://google.com">Edit</a>
+                            <a class="btn btn-info" href="https://google.com">Edit</a>
                             <a class="btn btn-danger" href="https://google.com">Delete</a>
                         </td>
                     </tr>
@@ -55,7 +55,7 @@
                         <td>CSE-0400</td>
                         <td>Next Class for saturday will be poswond and extra class time will be nitified later</td>
                         <td>
-                            <a class="btn btn-primary" href="https://google.com">Edit</a>
+                            <a class="btn btn-info" href="https://google.com">Edit</a>
                             <a class="btn btn-danger" href="https://google.com">Delete</a>
                         </td>
                     </tr>
@@ -64,7 +64,7 @@
                         <td>CSE-0400</td>
                         <td>Next Class for saturday will be poswond and extra class time will be nitified later</td>
                         <td>
-                            <a class="btn btn-primary" href="https://google.com">Edit</a>
+                            <a class="btn btn-info" href="https://google.com">Edit</a>
                             <a class="btn btn-danger" href="https://google.com">Delete</a>
                         </td>
                     </tr>
@@ -73,7 +73,7 @@
                         <td>CSE-0400</td>
                         <td>Next Class for saturday will be poswond and extra class time will be nitified later</td>
                         <td>
-                            <a class="btn btn-primary" href="https://google.com">Edit</a>
+                            <a class="btn btn-info" href="https://google.com">Edit</a>
                             <a class="btn btn-danger" href="https://google.com">Delete</a>
                         </td>
                     </tr>
@@ -82,7 +82,7 @@
                         <td>CSE-0400</td>
                         <td>Next Class for saturday will be poswond and extra class time will be nitified later</td>
                         <td>
-                            <a class="btn btn-primary" href="https://google.com">Edit</a>
+                            <a class="btn btn-info" href="https://google.com">Edit</a>
                             <a class="btn btn-danger" href="https://google.com">Delete</a>
                         </td>
                     </tr>
@@ -91,7 +91,7 @@
                         <td>CSE-0400</td>
                         <td>Next Class for saturday will be poswond and extra class time will be nitified later</td>
                         <td>
-                            <a class="btn btn-primary" href="https://google.com">Edit</a>
+                            <a class="btn btn-info" href="https://google.com">Edit</a>
                             <a class="btn btn-danger" href="https://google.com">Delete</a>
                         </td>
                     </tr>
@@ -100,7 +100,7 @@
                         <td>CSE-0400</td>
                         <td>Next Class for saturday will be poswond and extra class time will be nitified later</td>
                         <td>
-                            <a class="btn btn-primary" href="https://google.com">Edit</a>
+                            <a class="btn btn-info" href="https://google.com">Edit</a>
                             <a class="btn btn-danger" href="https://google.com">Delete</a>
                         </td>
                     </tr>

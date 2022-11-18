@@ -62,7 +62,7 @@
 					<div class="alert alert-danger">{{session('msg')}}</div>
 				  @endif
               </div>
-                <input type="submit" class="btn btn-primary" name="signIn" value="Sign In">
+                <input type="submit" class="btn btn-info" name="signIn" value="Sign In">
               </form>
             </div>
           </div>

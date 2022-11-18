@@ -30,10 +30,13 @@ class GroupController extends Controller
            'group_id'=>'required',
             'topic_id'=>'required',
             't_id'=>'required',
-            'group_status'=>'required',
+            // 'group_status'=>'required',
             'group_password'=>'required',
         ]);
 
+        // $request->group_status = ($request->group_status=="Active")? 1 : 0;
+
+        // dd($request->group_status);
         Group::create($request->all());
         Login::create([
             "user_id"=>$request->group_id,
@@ -68,7 +71,7 @@ class GroupController extends Controller
             'group_id'=>"required",
             't_id'=>"required",
             'topic_id'=>"required",
-            "group_status"=>"required"
+            // "group_status"=>"required"
         ]);
         if($request->group_password === $request->confirm_password){
             $group->update($request->all());
