@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Teacher;
+use App\Models\Login;
 
 class TeacherController extends Controller
 {
@@ -13,7 +15,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('teacher.index');
+        $teachers = Teacher::all();
+        return view('admin.teachers',["teachers"=>$teachers]);
     }
 
     /**
@@ -23,7 +26,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.addTeacher');
     }
 
     /**
@@ -34,7 +37,21 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            't_id'=>"required",
+            't_name'=>"required",
+            'dept'=>'required',
+            'email'=>'required',
+            'password'=>'required'
+        ]);
+
+        Teacher::create($request->all());
+        Login::create([
+            "user_id"=>$request->t_id,
+            "password"=>$request->password,
+            "role"=>"teacher"
+        ]);
+        return redirect('/admin/teacher');
     }
 
     /**
@@ -43,9 +60,10 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Teacher $teacher)
     {
-        //
+        $teachers = Teacher::all();
+        return view("admin.editTeacher", ["teachers"=>$teachers, "teacher"=>$teacher]);
     }
 
     /**
@@ -66,9 +84,10 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Teacher $teacher)
     {
-        //
+        $teacher->update($request->all());
+        return redirect('/admin/teacher');
     }
 
     /**
@@ -77,8 +96,9 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->delete();
+        return redirect('/admin/teacher');
     }
 }

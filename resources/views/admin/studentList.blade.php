@@ -27,7 +27,7 @@
             <div class="d-flex align-items-center">
 
                 {{-- Add Student Button  --}}
-                <a href="{{route('add-student')}}">
+                <a href="{{url('/admin/student/create')}}">
                     <button class="btn btn-info">Add Student</button>
                 </a>
 
@@ -46,75 +46,27 @@
                     <th scope="col">ID</th>
                     <th scope="col">Student Name</th>
                     <th scope="col">Dept.</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Details</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>UG02-15-10-046</td>
-                    <td>Neyamul haque al baker sinha</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_student_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-
-                <tr>
-                    <td>UG02-15-10-046</td>
-                    <td>Neyamul haque al baker sinha</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_student_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-
-                <tr>
-                    <td>UG02-15-10-046</td>
-                    <td>Neyamul haque al baker sinha</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_student_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-
-                <tr>
-                    <td>UG02-15-10-046</td>
-                    <td>Neyamul haque al baker sinha</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_student_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-
-                <tr>
-                    <td>UG02-15-10-046</td>
-                    <td>Neyamul haque al baker sinha</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_student_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-
-                <tr>
-                    <td>UG02-15-10-046</td>
-                    <td>Neyamul haque al baker sinha</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_student_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-
-                <tr>
-                    <td>UG02-15-10-046</td>
-                    <td>Neyamul haque al baker sinha</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_student_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-
+                    @foreach($students as $student)
+                        <tr>
+                            <td>{{$student->student_id}}</td>
+                            <td>{{$student->student_name}}</td>
+                            <td>{{$student->department}}</td>
+                            <td class="d-flex mt-2">
+                                <a href="{{url('/admin/student/'.$student->id)}}" class="">
+                                    <button class="btn btn-info me-1">Edit</button>
+                                </a>
+                                <form action="/admin/student/{{$student->id}}" method="POST">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
 
                 </tbody>
             </table>

@@ -36,17 +36,17 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{route('admin-students')}}">
+                        <a class="nav-link" aria-current="page" href="{{url('admin/student')}}">
                             Students
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin-teachers')}}">
+                        <a class="nav-link" href="{{url('admin/teacher')}}">
                             Teachers
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin-marks')}}">
+                        <a class="nav-link" href="{{url('admin/marks')}}">
                             Marks
                         </a>
                     </li>

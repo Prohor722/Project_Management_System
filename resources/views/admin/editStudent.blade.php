@@ -20,21 +20,22 @@
         </div>
         <div class="col-md-9 px-5 bg  ">
 
-            <!-- Add student inputs  -->
-            <form action="{{url('/admin/student')}}" method="POST">
+            <!-- Update student inputs  -->
+            <form action="/admin/student/{{$student->id}}" method="POST">
                 <div class="d-flex flex-column align-items-center justify-content-center my-5 pb-5">
                     <div class="row col-md-5">
+                        @method('put')
                         @csrf
                         <label for="student_id" class="form-label">Student ID</label>
-                        <input type="text" name="student_id" class="form-control" id="student_id" aria-describedby="emailHelp">
+                        <input type="text" name="student_id" value={{old("student_id",$student->student_id)}} class="form-control" id="student_id">
 
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" name="student_name" id="name" class="form-control" aria-describedby="emailHelp">
+                        <input type="text" name="student_name" value={{old("student_name",$student->student_name)}} id="name" class="form-control">
 
                         <label for="department" class="form-label">Department</label>
-                        <input type="text" id="department" name="department" class="form-control" aria-describedby="emailHelp">
+                        <input type="text" id="department" name="department" value={{old("department",$student->department)}} class="form-control">
 
-                        <button type="submit" class="btn btn-info pb-3 my-5 w-100">Submit</button>
+                        <button type="submit" class="btn btn-success pb-3 my-5 w-100">Update</button>
                     </div>
                 </div>
             </form>

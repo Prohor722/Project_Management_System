@@ -31,7 +31,7 @@
 
             {{-- Add Teacher Button  --}}
             <div class="d-flex align-items-center">
-                <a href="{{route('add-teacher')}}">
+                <a href="{{url('/admin/teacher/create')}}">
                     <button class="btn btn-info">Add Teacher</button>
                 </a>
 
@@ -52,68 +52,28 @@
                     <th scope="col">Teacher's Name</th>
                     <th scope="col">Dept.</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Details</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>CS-0245158</td>
-                    <td>Roktakin ahmed jobin bhuiyan</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_teacher_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-                <tr>
-                    <td>CS-0245158</td>
-                    <td>Roktakin ahmed jobin bhuiyan</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_teacher_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-                <tr>
-                    <td>CS-0245158</td>
-                    <td>Roktakin ahmed jobin bhuiyan</td>
-                    <td>CSE</td>
-                    <td class="text-danger">Deactive</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_teacher_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-                <tr>
-                    <td>CS-0245158</td>
-                    <td>Roktakin ahmed jobin bhuiyan</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_teacher_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-                <tr>
-                    <td>CS-0245158</td>
-                    <td>Roktakin ahmed jobin bhuiyan</td>
-                    <td>CSE</td>
-                    <td class="text-danger">deactive</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_teacher_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-                <tr>
-                    <td>CS-0245158</td>
-                    <td>Roktakin ahmed jobin bhuiyan</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_teacher_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-                <tr>
-                    <td>CS-0245158</td>
-                    <td>Roktakin ahmed jobin bhuiyan</td>
-                    <td>CSE</td>
-                    <td class="text-success">Active</td>
-                    <td><a href="#" class="text-dark">See more</a></td>
-                    <td><a href="./admin_teacher_update.html" class="btn btn-dark">Update</a></td>
-                </tr>
-
+                    @foreach($teachers as $teacher)
+                        <tr>
+                            <td>{{$teacher->t_id}}</td>
+                            <td>{{$teacher->t_name}}</td>
+                            <td>{{$teacher->dept}}</td>
+                            <td>{{ ($teacher->status)? "Active" : "In-Active"}}</td>
+                            <td class="d-flex mt-2">
+                                <a href="{{url('/admin/teacher/'.$teacher->id)}}" class="">
+                                    <button class="btn btn-info me-1">Edit</button>
+                                </a>
+                                <form action="/admin/teacher/{{$teacher->id}}" method="POST">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
 
                 </tbody>
             </table>
