@@ -51,4 +51,7 @@ Route::get('/student', 'App\Http\Controllers\StudentController@index')->name('st
 Route::view('/student/notice', 'group.notice')->name('student-notice');
 Route::view('/student/tasks', 'group.notice')->name('student-tasks');
 
-
+//--------------  Test Routes -------------
+Route::get('/test', function(){
+    return "Successfull";
+})->middleware('student');

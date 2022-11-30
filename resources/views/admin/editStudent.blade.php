@@ -27,13 +27,13 @@
                         @method('put')
                         @csrf
                         <label for="student_id" class="form-label">Student ID</label>
-                        <input type="text" name="student_id" value={{old("student_id",$student->student_id)}} class="form-control" id="student_id">
+                        <input type="text" name="student_id" class="form-control" id="student_id" value="{{old('student_id',$student->student_id)}}">
 
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" name="student_name" value={{old("student_name",$student->student_name)}} id="name" class="form-control">
+                        <input type="text" name="student_name" value="{{old('student_name',$student->student_name)}}" id="name" class="form-control">
 
                         <label for="department" class="form-label">Department</label>
-                        <input type="text" id="department" name="department" value={{old("department",$student->department)}} class="form-control">
+                        <input type="text" id="department" name="department" value="{{old('department',$student->department)}}" class="form-control">
 
                         <button type="submit" class="btn btn-success pb-3 my-5 w-100">Update</button>
                     </div>
