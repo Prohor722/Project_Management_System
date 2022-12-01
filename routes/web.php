@@ -36,7 +36,7 @@ Route::view('/admin/marks', 'admin.marks')->name('admin-marks');
 
 Route::get('/teacher', function(){
     return view('teacher.index');
-})->name('teacher.index');
+})->name('teacher.index')->middleware('user','teacher');
 Route::view('/teacher/studentList', 'teacher.studentList')->name('teacher-student-list');
 
 //groups

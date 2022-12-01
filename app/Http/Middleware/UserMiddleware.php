@@ -4,14 +4,16 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class TeacherMiddleware
+class UserMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        $role = $request->session()->get('role');
+        $id = $request->session()->get('user_id');
+        $token = $request->session()->get('access_token');
 
-        if($role=="teacher"){
+        if(Hash::check($id."prohor_banik", $token)){
             return $next($request);
         }
 

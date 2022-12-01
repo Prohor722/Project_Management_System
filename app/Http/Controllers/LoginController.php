@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\DB;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -45,7 +46,8 @@ class LoginController extends Controller
 		//dd($user);
 		if($user)
 		{
-            session(["user_id"=>$user->user_id, "role"=>$user->role]);
+            $access = Hash::make($user->user_id."prohor_banik");
+            session(["user_id"=>$user->user_id, "role"=>$user->role, "access_token"=>$access]);
 
 			if($user->role == "admin")
 			{

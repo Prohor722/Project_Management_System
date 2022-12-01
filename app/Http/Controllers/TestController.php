@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class TestController extends Controller
 {
@@ -13,6 +15,17 @@ class TestController extends Controller
      */
     public function index(Request $request)
     {
+        // dd(Crypt::encryptString("abcd"));
+        $a = "test";
+        $b = "_check";
+        $value = Hash::make($a.$b);
+        // dd(Hash::check("test_check", $value));
+
+        // dd($request->session()->has('role'));
+        // dd($request->session()->get('ambala'));
+
+        // return $request->session()->get('role')? "ace": "nai";
+
         return $request->session()->all();
     }
 
