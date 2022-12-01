@@ -20,39 +20,46 @@ Route::get('/logout', [LoginController::class,'logout'])->name('logout.index');
 
 //----------------------Admin Routes---------------------------//
 
-Route::get('/admin', [AdminController::class,'index'])->name('admin.index');
-
-//students
-Route::resource('/admin/student', StudentController::class);
-//teachers
-Route::view('/admin/addTeacher', 'admin.addTeacher')->name('add-teacher');
-Route::resource('/admin/teacher', TeacherController::class);
-//marks
-Route::view('/admin/marks', 'admin.marks')->name('admin-marks');
-
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin', [AdminController::class,'index'])->name('admin.index');
+    //students
+    Route::resource('/admin/student', StudentController::class);
+    //teachers
+    Route::view('/admin/addTeacher', 'admin.addTeacher')->name('add-teacher');
+    Route::resource('/admin/teacher', TeacherController::class);
+    //marks
+    Route::view('/admin/marks', 'admin.marks')->name('admin-marks');
+});
 
 
 //----------------------Teacher Routes-----------------------------//
 
-Route::get('/teacher', function(){
-    return view('teacher.index');
-})->name('teacher.index')->middleware('user','teacher');
-Route::view('/teacher/studentList', 'teacher.studentList')->name('teacher-student-list');
+Route::middleware(['teacher'])->group(function () {
 
-//groups
-Route::resource('/teacher/groups', GroupController::class);
-//Topic
-Route::resource('/teacher/topic', TopicController::class);
-//Notice
-Route::resource('/teacher/notice', NoticeController::class);
-//tasks
-Route::resource('/teacher/tasks', TaskController::class);
+    Route::get('/teacher', function(){
+        return view('teacher.index');
+    })->name('teacher.index')->middleware('user','teacher');
+    Route::view('/teacher/studentList', 'teacher.studentList')->name('teacher-student-list');
+
+    //groups
+    Route::resource('/teacher/groups', GroupController::class);
+    //Topic
+    Route::resource('/teacher/topic', TopicController::class);
+    //Notice
+    Route::resource('/teacher/notice', NoticeController::class);
+    //tasks
+    Route::resource('/teacher/tasks', TaskController::class);
+});
 
 
-//Group Routes
-Route::get('/student', 'App\Http\Controllers\StudentController@index')->name('student.index');
-Route::view('/student/notice', 'group.notice')->name('student-notice');
-Route::view('/student/tasks', 'group.notice')->name('student-tasks');
+//-------------------- Group Routes --------------------------------//
+
+Route::middleware(['web'])->group(function () {
+
+    Route::get('/student', 'App\Http\Controllers\StudentController@index')->name('student.index');
+    Route::view('/student/notice', 'group.notice')->name('student-notice');
+    Route::view('/student/tasks', 'group.notice')->name('student-tasks');
+});
 
 //--------------  Test Routes -------------
 Route::get('/test', function(){
