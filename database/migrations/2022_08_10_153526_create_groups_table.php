@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('topic_id');
             $table->string('t_id');
             $table->boolean('group_status')->nullable();
-            $table->string('group_password');
             $table->timestamps();
         });
     }

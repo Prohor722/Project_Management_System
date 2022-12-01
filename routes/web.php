@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TopicController;
@@ -10,11 +10,12 @@ use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TestController;
 
 //Common Routes
 Route::get('/', [LoginController::class,'index'])->name('login.index');
 Route::post('/login', [LoginController::class,'verify'])->name('login.verify');
-Route::get('/logout', [LogoutController::class,'index'])->name('logout.index');
+Route::get('/logout', [LoginController::class,'logout'])->name('logout.index');
 
 
 //----------------------Admin Routes---------------------------//
@@ -53,5 +54,7 @@ Route::view('/student/tasks', 'group.notice')->name('student-tasks');
 
 //--------------  Test Routes -------------
 Route::get('/test', function(){
-    return "Successfull";
-})->middleware('student');
+    session(['name'=>"Prohor Web", 'profession'=>"Web Developer", "job"=>"ongoing"]);
+});
+
+Route::get('/all', [TestController::class, 'index']);

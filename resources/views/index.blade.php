@@ -35,12 +35,12 @@
           <div class="row mt-5 g-0">
             <div class="col-md-4 offset-md-4 mt-5 shadow p-5">
 
-              <form class="" method="post" >
+              <form class="" action="{{url('/login')}}" method="post" >
                 @csrf
                 <h4 class="text-center">Log In</h4>
                 <div class="mb-3">
                   <label class="form-label">ID</label>
-                  <input class="form-control" type="text" name="email" >
+                  <input class="form-control" type="text" name="user_id" >
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Password</label>

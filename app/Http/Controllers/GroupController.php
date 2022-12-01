@@ -34,6 +34,8 @@ class GroupController extends Controller
             'group_password'=>'required',
         ]);
 
+        // dd($request);
+
         // $request->group_status = ($request->group_status=="Active")? 1 : 0;
 
         // dd($request->group_status);
