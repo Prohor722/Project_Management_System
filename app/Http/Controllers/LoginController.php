@@ -4,12 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\DB;
-
+use Illuminate\Support\Arr;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $user = $request->session()->all();
+
+        // dd(Arr::exists($user, 'role'));
+
+        if(Arr::exists($user, 'user_id') && Arr::exists($user, 'role')){
+
+            if($user['role'] == "admin")
+                {
+                    return redirect()->route('admin.index');
+                }
+            elseif($user['role'] == "teacher")
+                {
+                    return redirect()->route('teacher.index');
+                }
+            elseif($user['role'] == "student")
+                {
+                    return redirect()->route('student.index');
+                }
+        }
+
         return view('index');
     }
     public function verify(Request $req)

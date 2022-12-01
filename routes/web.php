@@ -34,7 +34,9 @@ Route::view('/admin/marks', 'admin.marks')->name('admin-marks');
 
 //----------------------Teacher Routes-----------------------------//
 
-Route::get('/teacher', 'App\Http\Controllers\TeacherController@index')->name('teacher.index');
+Route::get('/teacher', function(){
+    return view('teacher.index');
+})->name('teacher.index');
 Route::view('/teacher/studentList', 'teacher.studentList')->name('teacher-student-list');
 
 //groups
