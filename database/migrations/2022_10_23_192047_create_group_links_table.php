@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('topics', function (Blueprint $table) {
+        Schema::create('group_links', function (Blueprint $table) {
             $table->id();
-            $table->string('topic_id');
-            $table->string('topic_description');
-            $table->string('t_id');
+            $table->string('group_id');
+            $table->unsignedBigInteger('task_id');
+            $table->string('link');
+            $table->foreign('group_id')->references('group_id')->on('groups')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('task_id')->references('id')->on('tasks')->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topics');
+        Schema::dropIfExists('group_links');
     }
 };

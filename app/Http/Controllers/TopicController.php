@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TopicController extends Controller
 {
@@ -12,9 +13,10 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $topics = Topic::all();
+        $id=$request->session()->get('user_id');
+        $topics = Topic::where('t_id', $id)->get();
         return view('teacher.topic',['topics'=>$topics]);
     }
 
@@ -36,11 +38,14 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
+        $request['t_id']=$request->session()->get('user_id');
+
         $request->validate([
-            'topic_id'=>"required",
+            'topic_id'=>"required|unique:topics",
             'topic_description'=>"required",
             't_id'=>"required"
         ]);
+
 
         Topic::create($request->all());
         return redirect('/teacher/topic');
@@ -68,32 +73,21 @@ class TopicController extends Controller
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Topic $topic)
     {
         $request->validate([
-            'topic_id'=>'required',
+            'topic_id'=>['required',
+            Rule::unique('topics')->ignore($topic->id)
+        ],
             'topic_description'=>'required',
-            't_id'=>'required'
         ]);
+
+
+        $request['t_id']=$request->session()->get('user_id');
 
         $topic->update($request->all());
         return redirect('/teacher/topic');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Topic $topic)
     {
         $topic->delete();

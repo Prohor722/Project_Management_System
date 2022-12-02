@@ -9,7 +9,7 @@
             @foreach($errors->all() as $error)
                 <p>{{$error}}</p>
             @endforeach
-            <!-- Add group  -->
+            <!-- Add Topic  -->
                 <form class="mb-5 pb-5" action="/teacher/topic" method="POST">
                     @csrf
                     <h4 class="mb-3 text-center">Add Topic</h4>
@@ -21,12 +21,8 @@
                         <label class="form-label">Topic Description</label>
                         <input type="text" class="form-control" name="topic_description" value="{{old('topic_description')}}">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Teacher ID</label>
-                        <input type="text" class="form-control" name="t_id" value="{{old('t_id')}}">
-                    </div>
 
-                    <button type="submit" class="btn btn-info">Submit</button>
+                    <button type="submit" class="btn btn-info">Add Topic</button>
                 </form>
 
 
@@ -47,7 +43,6 @@
                         <tr>
                             <th scope="col">Topic ID</th>
                             <th scope="col">Topic Description</th>
-                            <th scope="col">Teacher's ID</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
@@ -56,7 +51,6 @@
                                 <tr>
                                     <td>{{$topic->topic_id}}</td>
                                     <td>{{$topic->topic_description}}</td>
-                                    <td>{{$topic->t_id}}</td>
                                     <td class="d-flex">
                                         <a href="{{url('/teacher/topic/'.$topic->id)}}" class="">
                                             <button class="btn btn-info me-1">Edit</button>

@@ -68,3 +68,4 @@ Route::get('/test', function(){
 });
 
 Route::get('/all', [TestController::class, 'index']);
+Route::get('/abc', [TestController::class, 'abc']);

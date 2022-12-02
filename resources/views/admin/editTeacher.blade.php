@@ -25,6 +25,10 @@
 
         <div class="col-md-9 py-3 px-5 bg  ">
 
+            @foreach($errors->all() as $error)
+                    <p>{{$error}}</p>
+            @endforeach
+
             <!-- Edit teacher inputs  -->
             <form action="/admin/teacher/{{$teacher->id}}" method="post">
                 @method("put")

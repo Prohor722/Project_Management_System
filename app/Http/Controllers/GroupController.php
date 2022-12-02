@@ -6,13 +6,16 @@ use App\Models\Group;
 use App\Models\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class GroupController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $groups = Group::all();
+        $id = $request->session()->get('user_id');
+
+        $groups = Group::where('t_id', $id)->get();
         return view('teacher/groups',["groups"=>$groups]);
     }
 
@@ -24,23 +27,18 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-           'group_id'=>'required',
+           'group_id'=>"required:unique:groups",
             'topic_id'=>'required',
-            // 'group_status'=>'required',
-            'group_password'=>'required',
+            'password'=>'required',
+            'confirm_password'=>'required|same:password',
         ]);
 
         $request['t_id']=$request->session()->get('user_id');
 
-        // dd($request);
-
-        // $request->group_status = ($request->group_status=="Active")? 1 : 0;
-
-        // dd($request->group_status);
         Group::create($request->all());
         Login::create([
             "user_id"=>$request->group_id,
-            "password"=>$request->group_password,
+            "password"=>$request->password,
             "role"=>"student"
         ]);
 
@@ -61,12 +59,15 @@ class GroupController extends Controller
 
     public function update(Request $request, Group $group)
     {
+        $id = $group->id;
+
         $request->validate([
-            'group_id'=>"required",
+            'group_id'=>['required',
+            Rule::unique('groups')->ignore($id)
+        ],
             'topic_id'=>"required",
         ]);
 
-        $id = $request->session()->get('id');
         $request->session()->forget(['id']);
         $groupOldDetails = DB::table('groups')->find($id);
         $old_group_id = $groupOldDetails->group_id;
@@ -74,7 +75,7 @@ class GroupController extends Controller
         // dd($login);
 
 
-        $pass = $request->group_password ;
+        $pass = $request->password ;
         $cpass = $request->confirm_password;
         $new_group_id = $request->group_id;
 

@@ -7,38 +7,24 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::all();
+        $id = $request->session()->get('user_id');
+        $tasks = Task::where('t_id',$id)->get();
         return view('teacher.tasks',['tasks'=>$tasks]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        $request['t_id']=$request->session()->get('user_id');
+
         $request->validate([
             'task_title'=>"required",
             'task_description'=>"required",
+            't_id'=>"required",
             'course_code'=>"required",
             'deadline'=>"required",
         ]);
@@ -46,25 +32,12 @@ class TaskController extends Controller
         Task::create($request->all());
         return redirect('/teacher/tasks');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
     public function show(Task $task)
     {
         $tasks = Task::all();
         return view('teacher.taskEdit',['tasks'=>$tasks, 'task'=>$task]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Task $task)
     {
         //
@@ -79,11 +52,13 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        // $request->validate([
-        //     'topic_id'=>'required',
-        //     'topic_description'=>'required',
-        //     't_id'=>'required'
-        // ]);
+        $request['t_id']=$request->session()->get('user_id');
+
+        $request->validate([
+            'topic_id'=>'required',
+            'topic_description'=>'required',
+            't_id'=>'required'
+        ]);
 
         $task->update($request->all());
         return redirect('/teacher/tasks');

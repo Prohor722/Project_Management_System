@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use App\Models\Group;
 
 class TestController extends Controller
 {
@@ -29,15 +31,16 @@ class TestController extends Controller
         return $request->session()->all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function abc(){
+        // $group = DB::table('groups')->where('group_id','gp1')->first();
+        $group = Group::where('group_id','GP-001')->first();
+        $group_students = $group->group_students;
+        // dd($group_students);
+
+        $id = Group::where('group_id','gp1')->with('group_students')->get();
+        return $group_students;
     }
+    public function create(){    }
 
     /**
      * Store a newly created resource in storage.

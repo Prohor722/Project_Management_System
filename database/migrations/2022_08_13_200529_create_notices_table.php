@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('notice_description');
             $table->string('course_code');
+            $table->string('t_id');
+            $table->foreign('t_id')->references('t_id')->on('teachers')
+            ->cascadeOnUpdate()->cascadeOnDelete();
             $table->date('deadline');
             $table->timestamps();
         });

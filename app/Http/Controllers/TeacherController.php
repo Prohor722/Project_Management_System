@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Teacher;
 use App\Models\Login;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class TeacherController extends Controller
 {
@@ -23,11 +24,12 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            't_id'=>"required",
+            't_id'=>"required|unique:teachers",
             't_name'=>"required",
             'dept'=>'required',
-            'email'=>'required',
-            'password'=>'required'
+            'email'=>"required|unique:teachers",
+            'password'=>'required',
+            'confirm_password'=>'required|same:password',
         ]);
 
         Teacher::create($request->all());
@@ -42,7 +44,6 @@ class TeacherController extends Controller
     public function show(Teacher $teacher, Request $request)
     {
         $teachers = Teacher::all();
-        $request->session()->put('id', $teacher->id);
         return view("admin.editTeacher", ["teachers"=>$teachers, "teacher"=>$teacher]);
     }
 
@@ -53,17 +54,22 @@ class TeacherController extends Controller
 
     public function update(Request $request, Teacher $teacher)
     {
-        $request->validate([
-            't_id'=>"required",
-            't_name'=>"required",
-            'dept'=>"required",
-            'email'=>"required",
-        ]);
+        $id = $teacher->id;
 
-        $id = $request->session()->get('id');
-        $request->session()->forget(['id']);
+        $request->validate([
+        't_id'=>['required',
+            Rule::unique('teachers')->ignore($id)
+            ],
+        't_name'=>"required",
+        'dept'=>"required",
+        'email'=>['required',
+            Rule::unique('teachers')->ignore($id)
+            ],
+    ]);
 
         $teacherOldDetails = DB::table('teachers')->find($id);
+        $request->session()->forget(['id']);
+
         $old_teacher_id = $teacherOldDetails->t_id;
         $login = DB::table('logins')->where('user_id',$old_teacher_id)->first();
         // dd($login);

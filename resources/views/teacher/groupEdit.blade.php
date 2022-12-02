@@ -8,7 +8,7 @@
 
 
 
-                @foreach($errors->all() as $error)
+            @foreach($errors->all() as $error)
                     <p>{{$error}}</p>
             @endforeach
             <!-- Edit group  -->
@@ -33,7 +33,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="group_password" value='{{old("group_password",$group->group_password)}}'>
+                        <input type="password" class="form-control" name="password" value='{{old("group_password",$group->group_password)}}'>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Confirm Password</label>

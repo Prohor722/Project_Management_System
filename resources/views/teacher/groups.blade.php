@@ -34,7 +34,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="group_password" value="">
+                        <input type="password" class="form-control" name="password" value="">
                     </div>
 
                     <div class="mb-3">
@@ -83,6 +83,9 @@
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
+                            <a href="{{url('/teacher/groups/'.$group->id)}}" class="">
+                                <button class="btn btn-secondary ms-1">Manage</button>
+                            </a>
                         </td>
                     </tr>
                     @endforeach

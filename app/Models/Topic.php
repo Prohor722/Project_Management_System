@@ -9,4 +9,13 @@ class Topic extends Model
 {
     use HasFactory;
     protected $fillable=['topic_id','topic_description','t_id'];
+
+    public function groups()
+    {
+        return $this->belongsTo(Group::class, 'topic_id', 'topic_id');
+    }
+    public function teachers()
+    {
+        return $this->belongsTo(Teacher::class, 't_id', 't_id');
+    }
 }

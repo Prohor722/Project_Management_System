@@ -15,20 +15,14 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('group_id');
+            $table->string('group_id')->unique();
             $table->string('topic_id');
             $table->string('t_id');
+            $table->foreign('topic_id')->references('topic_id')->on('topics')->cascadeOnUpdate();
+            $table->foreign('t_id')->references('t_id')->on('teachers')->cascadeOnUpdate();
             $table->boolean('group_status')->nullable();
             $table->timestamps();
         });
-
-        // Schema::create('logins', function (Blueprint $table) {
-        //     $table->string('user_id');
-        //     $table->foreign('user_id')->referances('group_id')->on('groups')->onDelete('cascade');
-        //     $table->string('role');
-        //     $table->string('password');
-        //     $table->timestamps();
-        // });
     }
 
     /**
