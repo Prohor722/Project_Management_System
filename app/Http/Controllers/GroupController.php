@@ -67,6 +67,7 @@ class GroupController extends Controller
         ]);
 
         $id = $request->session()->get('id');
+        $request->session()->forget(['id']);
         $groupOldDetails = DB::table('groups')->find($id);
         $old_group_id = $groupOldDetails->group_id;
         $login = DB::table('logins')->where('user_id',$old_group_id)->first();
@@ -101,7 +102,9 @@ class GroupController extends Controller
 
     public function destroy(Group $group)
     {
+        // dd($group->group_id);
         $group->delete();
+        DB::table('logins')->where('user_id',$group->group_id)->delete();
         return redirect('/teacher/groups');
     }
 }
