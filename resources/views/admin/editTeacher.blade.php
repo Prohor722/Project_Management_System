@@ -54,6 +54,9 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" id="password" aria-describedby="emailHelp">
 
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
+                        <input type="password" name="confirm_password" class="form-control" id="confirm_password" aria-describedby="emailHelp">
+
                         <button type="submit" class="btn btn-success mt-5 w-100">Update</button>
                     </div>
                 </div>
