@@ -102,7 +102,6 @@ class GroupController extends Controller
 
     public function destroy(Group $group)
     {
-        // dd($group->group_id);
         $group->delete();
         DB::table('logins')->where('user_id',$group->group_id)->delete();
         return redirect('/teacher/groups');

@@ -58,6 +58,7 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher)
     {
         $teacher->delete();
+        DB::table('logins')->where('user_id',$teacher->t_id)->delete();
         return redirect('/admin/teacher');
     }
 }
