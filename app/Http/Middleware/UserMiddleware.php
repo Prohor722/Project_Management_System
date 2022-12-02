@@ -11,9 +11,10 @@ class UserMiddleware
     public function handle(Request $request, Closure $next)
     {
         $id = $request->session()->get('user_id');
+        $role = $request->session()->get('role');
         $token = $request->session()->get('access_token');
 
-        if(Hash::check($id."prohor_banik", $token)){
+        if(Hash::check($id.$role."prohor_banik", $token)){
             return $next($request);
         }
 

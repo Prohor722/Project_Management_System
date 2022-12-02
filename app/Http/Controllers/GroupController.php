@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Models\Login;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $groups = Group::all();
@@ -29,10 +26,11 @@ class GroupController extends Controller
         request()->validate([
            'group_id'=>'required',
             'topic_id'=>'required',
-            't_id'=>'required',
             // 'group_status'=>'required',
             'group_password'=>'required',
         ]);
+
+        $request['t_id']=$request->session()->get('user_id');
 
         // dd($request);
 
@@ -49,9 +47,10 @@ class GroupController extends Controller
         return redirect('/teacher/groups');
     }
 
-    public function show(Group $group)
+    public function show(Group $group, Request $request)
     {
         $groups = Group::all();
+        $request->session()->put('id', $group->id);
         return view('teacher.groupEdit',["groups"=>$groups, 'group'=>$group]);
     }
 
@@ -60,33 +59,46 @@ class GroupController extends Controller
         return "edit";
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Group $group)
     {
         $request->validate([
             'group_id'=>"required",
-            't_id'=>"required",
             'topic_id'=>"required",
-            // "group_status"=>"required"
         ]);
-        if($request->group_password === $request->confirm_password){
+
+        $id = $request->session()->get('id');
+        $groupOldDetails = DB::table('groups')->find($id);
+        $old_group_id = $groupOldDetails->group_id;
+        $login = DB::table('logins')->where('user_id',$old_group_id)->first();
+        // dd($login);
+
+
+        $pass = $request->group_password ;
+        $cpass = $request->confirm_password;
+        $new_group_id = $request->group_id;
+
+        if($pass && ($pass == $cpass) ){
+
             $group->update($request->all());
+            DB::table('logins')->where('id', $login->id)
+            ->update(['password' => $pass]);
+
+            if($old_group_id !== $new_group_id){
+                DB::table('logins')->where('id', $login->id)
+                ->update(['user_id' => $new_group_id]);
+            }
+        }
+        else if(!$pass && !$cpass){
+            $group->update($request->all());
+            if($old_group_id !== $new_group_id){
+                DB::table('logins')->where('id', $login->id)
+                ->update(['user_id' => $new_group_id]);
+            }
         }
         return redirect('/teacher/groups');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Group  $group
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Group $group)
     {
         $group->delete();

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Login;
 
 class LoginController extends Controller
 {
@@ -46,7 +47,7 @@ class LoginController extends Controller
 		//dd($user);
 		if($user)
 		{
-            $access = Hash::make($user->user_id."prohor_banik");
+            $access = Hash::make($user->user_id.$user->role."prohor_banik");
             session(["user_id"=>$user->user_id, "role"=>$user->role, "access_token"=>$access]);
 
 			if($user->role == "admin")
@@ -72,5 +73,14 @@ class LoginController extends Controller
     public function logout(Request $request){
         $request->session()->flush();
         return redirect()->route('login.index');
+    }
+
+    public function admin(){
+        $data = DB::table('logins')->where('role', 'admin')->first();
+
+        if(!$data){
+            Login::create(["user_id"=>"admin","password"=>"123","role"=>"admin"]);
+        }
+        return redirect('/');;
     }
 }

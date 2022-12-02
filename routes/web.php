@@ -16,6 +16,7 @@ use App\Http\Controllers\TestController;
 Route::get('/', [LoginController::class,'index'])->name('login.index');
 Route::post('/login', [LoginController::class,'verify'])->name('login.verify');
 Route::get('/logout', [LoginController::class,'logout'])->name('logout.index');
+Route::get('/admin/create', [LoginController::class,'admin']);
 
 
 //----------------------Admin Routes---------------------------//
@@ -54,7 +55,7 @@ Route::middleware(['teacher'])->group(function () {
 
 //-------------------- Group Routes --------------------------------//
 
-Route::middleware(['web'])->group(function () {
+Route::middleware(['group'])->group(function () {
 
     Route::get('/student', 'App\Http\Controllers\StudentController@index')->name('student.index');
     Route::view('/student/notice', 'group.notice')->name('student-notice');
@@ -63,7 +64,7 @@ Route::middleware(['web'])->group(function () {
 
 //--------------  Test Routes -------------
 Route::get('/test', function(){
-    session(['name'=>"Prohor Web", 'profession'=>"Web Developer", "job"=>"ongoing"]);
+    session(['name'=>"Prohor Web"]);
 });
 
 Route::get('/all', [TestController::class, 'index']);

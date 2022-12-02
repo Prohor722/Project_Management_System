@@ -23,10 +23,6 @@
                         <label class="form-label">Topic ID</label>
                         <input type="text" class="form-control" name="topic_id" value="{{old('topic_id')}}">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Teacher ID</label>
-                        <input type="text" class="form-control" name="t_id" value="{{old('t_id')}}">
-                    </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Group Status</label>

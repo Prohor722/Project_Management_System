@@ -21,6 +21,14 @@ return new class extends Migration
             $table->boolean('group_status')->nullable();
             $table->timestamps();
         });
+
+        // Schema::create('logins', function (Blueprint $table) {
+        //     $table->string('user_id');
+        //     $table->foreign('user_id')->referances('group_id')->on('groups')->onDelete('cascade');
+        //     $table->string('role');
+        //     $table->string('password');
+        //     $table->timestamps();
+        // });
     }
 
     /**
