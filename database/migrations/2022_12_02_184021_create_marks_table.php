@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('marks', function (Blueprint $table) {
             $table->id();
             $table->string('student_id')->unique();
-            $table->string('course_code');
             $table->foreign('student_id')->references('student_id')->on('students')
             ->cascadeOnUpdate()->cascadeOnDelete();
 

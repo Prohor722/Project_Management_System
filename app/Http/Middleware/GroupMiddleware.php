@@ -5,13 +5,13 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class StudentMiddleware
+class GroupMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
         $role = $request->session()->get('role');
 
-        if($role=="group"){
+        if($role=="student"){
             return $next($request);
         }
 

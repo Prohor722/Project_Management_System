@@ -26,7 +26,6 @@ Route::middleware(['admin'])->group(function () {
     //students
     Route::resource('/admin/student', StudentController::class);
     //teachers
-    Route::view('/admin/addTeacher', 'admin.addTeacher')->name('add-teacher');
     Route::resource('/admin/teacher', TeacherController::class);
     //marks
     Route::view('/admin/marks', 'admin.marks')->name('admin-marks');
