@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('t_id')->unique();
             $table->string('t_name');
-            $table->string('dept');
+            $table->string('department');
             $table->boolean('status')->nullable();
             $table->string('email')->unique();
+            $table->string('password');
             $table->timestamps();
         });
     }

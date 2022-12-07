@@ -33,7 +33,7 @@
 <main>
     <div class="container-fluid">
           <div class="row mt-5 g-0">
-            <div class="col-md-4 offset-md-4 mt-5 shadow p-5">
+            <div class="col-md-4 offset-md-4 mt-2 shadow p-5">
 
               <form class="" action="{{url('/login')}}" method="post" >
                 @csrf
@@ -45,6 +45,15 @@
                 <div class="mb-3">
                   <label class="form-label">Password</label>
                   <input class="form-control" type="password" name="password" >
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Select User</label>
+                    <select class="form-control" name="role">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Admin</option>
+                    </select>
                 </div>
 
 				<div class="w3-container">
@@ -62,7 +71,7 @@
 					<div class="alert alert-danger">{{session('msg')}}</div>
 				  @endif
               </div>
-                <input type="submit" class="btn btn-info" name="signIn" value="Sign In">
+                <button type="submit" class="btn btn-info">Sign In</button>
               </form>
             </div>
           </div>

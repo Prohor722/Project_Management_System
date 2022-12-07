@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('marks', function (Blueprint $table) {
+        Schema::create('student_marks', function (Blueprint $table) {
             $table->id();
+            $table->string('student_id');
+            $table->foreign('student_id')->references('student_id')->on('students')
+            ->cascadeOnUpdate()->cascadeOnDelete();
             $table->double('po1', 4, 2)->nullable()->default(00.00);
             $table->double('po2', 4, 2)->nullable()->default(00.00);
             $table->double('po3', 4, 2)->nullable()->default(00.00);
@@ -27,6 +30,7 @@ return new class extends Migration
             $table->double('po10', 4, 2)->nullable()->default(00.00);
             $table->double('po11', 4, 2)->nullable()->default(00.00);
             $table->double('po12', 4, 2)->nullable()->default(00.00);
+            $table->double('total', 5, 2)->nullable()->default(00.00);
             $table->timestamps();
         });
     }
@@ -38,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('marks');
+        Schema::dropIfExists('student_marks');
     }
 };

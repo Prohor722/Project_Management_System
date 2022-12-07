@@ -33,11 +33,7 @@ class TeacherController extends Controller
         ]);
 
         Teacher::create($request->all());
-        Login::create([
-            "user_id"=>$request->t_id,
-            "password"=>$request->password,
-            "role"=>"teacher"
-        ]);
+
         return redirect('/admin/teacher');
     }
 
@@ -65,47 +61,24 @@ class TeacherController extends Controller
         'email'=>['required',
             Rule::unique('teachers')->ignore($id)
             ],
+        'password'=>'required',
+        'confirm_password'=>'required|same:password',
     ]);
-
-        $teacherOldDetails = DB::table('teachers')->find($id);
-        $request->session()->forget(['id']);
-
-        $old_teacher_id = $teacherOldDetails->t_id;
-        $login = DB::table('logins')->where('user_id',$old_teacher_id)->first();
-        // dd($login);
-
 
         $pass = $request->password ;
         $cpass = $request->confirm_password;
-        $new_teacher_id = $request->t_id;
 
-        if($pass && ($pass == $cpass) ){
-
-            $teacher->update($request->all());
-            DB::table('logins')->where('id', $login->id)
-            ->update(['password' => $pass]);
-
-            if($old_teacher_id !== $new_teacher_id){
-                DB::table('logins')->where('id', $login->id)
-                ->update(['user_id' => $new_teacher_id]);
-            }
+        if(!$pass || ($pass !== $cpass) ){
+            $request['password'] = $teacher->password;
         }
-        else if(!$pass && !$cpass){
-            $teacher->update($request->all());
-            if($old_teacher_id !== $new_teacher_id){
-                DB::table('logins')->where('id', $login->id)
-                ->update(['user_id' => $new_teacher_id]);
-            }
-        }
-
-        // $teacher->update($request->all());
+        dd($request);
+        $teacher->update($request->all());
         return redirect('/admin/teacher');
     }
 
     public function destroy(Teacher $teacher)
     {
         $teacher->delete();
-        DB::table('logins')->where('user_id',$teacher->t_id)->delete();
         return redirect('/admin/teacher');
     }
 }

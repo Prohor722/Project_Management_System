@@ -22,8 +22,4 @@ class Teacher extends Model
     {
         return $this->hasMany(Notic::class, 't_id', 't_id');
     }
-    public function tasks()
-    {
-        return $this->hasMany(Task::class, 't_id', 't_id');
-    }
 }

@@ -12,7 +12,7 @@ class Topic extends Model
 
     public function groups()
     {
-        return $this->belongsTo(Group::class, 'topic_id', 'topic_id');
+        return $this->belongsToMany(Group::class, 'topic_id', 'topic_id');
     }
     public function teachers()
     {

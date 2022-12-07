@@ -17,9 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('task_title');
             $table->string('task_description');
-            $table->string('t_id');
-            $table->foreign('t_id')->references('t_id')->on('teachers')->cascadeOnUpdate();
-            $table->string('course_code');
             $table->string('deadline');
             $table->timestamps();
         });

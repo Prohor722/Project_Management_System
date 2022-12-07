@@ -36,38 +36,49 @@ class LoginController extends Controller
     }
     public function verify(Request $req)
 	{
+        $role = $req->role;
 		$validatedData = $req->validate([
 			'user_id' => 'required|max:50',
-			'password' => 'required'
+			'password' => 'required',
+			'role' => 'required',
 		]);
 
-		$user = DB::table('logins')->where('user_id', $req->user_id)
-					->where('password', $req->password)
-					->first();
 		//dd($user);
-		if($user)
-		{
-            $access = Hash::make($user->user_id.$user->role."prohor_banik");
-            session(["user_id"=>$user->user_id, "role"=>$user->role, "access_token"=>$access]);
+		if($role == 'admin'){
+            $user = DB::table('admins')->where('admin_id', $req->user_id)
+                        ->where('password', $req->password)
+                        ->first();
+            if($user->admin_id == $req->user_id){
+                $access = Hash::make($user->admin_id.$role."prohor_banik");
+                session(["user_id"=>$user->admin_id, "role"=>$role, "access_token"=>$access]);
 
-			if($user->role == "admin")
-			{
-				return redirect()->route('admin.index');
+                return redirect()->route('admin.index');
             }
-            elseif($user->role == "teacher")
-            {
-				return redirect()->route('teacher.index');
+        }
+        else if($role == 'teacher'){
+            $user = DB::table('teachers')->where('t_id', $req->user_id)
+                        ->where('password', $req->password)
+                        ->first();
+            if($user->t_id == $req->user_id){
+                $access = Hash::make($user->t_id.$role."prohor_banik");
+                session(["user_id"=>$user->t_id, "role"=>$role, "access_token"=>$access]);
+
+                return redirect()->route('teacher.index');
             }
-            elseif($user->role == "student")
-            {
-				return redirect()->route('student.index');
+        }
+        else if($role == 'student'){
+            $user = DB::table('students')->where('student_id', $req->user_id)
+                        ->where('password', $req->password)
+                        ->first();
+            if($user->student_id == $req->user_id){
+                $access = Hash::make($user->student_id.$role."prohor_banik");
+                session(["user_id"=>$user->student_id, "role"=>$role, "access_token"=>$access]);
+
+                return redirect()->route('group.index');
             }
-		}
-		else
-		{
-			$req->session()->flash('msg', 'invalid username/password');
-			return redirect()->route('login.index');
-		}
+        }
+		$req->session()->flash('msg', 'invalid username/password');
+		return redirect()->route('login.index');
 	}
 
     public function logout(Request $request){

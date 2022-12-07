@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Marks extends Model
 {
     use HasFactory;
-    protected $fillable=['student_id','p0','p1','p2','p3','p4',
+    protected $fillable=['p0','p1','p2','p3','p4',
     'p5','p6','p7','p8','p9','p10','p11','p12'];
 
-    public function students(){
-        return $this->belongsTo(Student::class, 'student_id', 'student_id');
-    }
+    // public function students(){
+    //     return $this->belongsTo(Student::class, 'student_id', 'student_id');
+    // }
 }
