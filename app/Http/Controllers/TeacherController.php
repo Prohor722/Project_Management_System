@@ -26,7 +26,7 @@ class TeacherController extends Controller
         $request->validate([
             't_id'=>"required|unique:teachers",
             't_name'=>"required",
-            'dept'=>'required',
+            'department'=>'required',
             'email'=>"required|unique:teachers",
             'password'=>'required',
             'confirm_password'=>'required|same:password',
@@ -57,12 +57,10 @@ class TeacherController extends Controller
             Rule::unique('teachers')->ignore($id)
             ],
         't_name'=>"required",
-        'dept'=>"required",
+        'department'=>"required",
         'email'=>['required',
             Rule::unique('teachers')->ignore($id)
             ],
-        'password'=>'required',
-        'confirm_password'=>'required|same:password',
     ]);
 
         $pass = $request->password ;
@@ -71,7 +69,7 @@ class TeacherController extends Controller
         if(!$pass || ($pass !== $cpass) ){
             $request['password'] = $teacher->password;
         }
-        dd($request);
+        // dd($request);
         $teacher->update($request->all());
         return redirect('/admin/teacher');
     }

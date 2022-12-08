@@ -24,10 +24,6 @@
                         <textarea type="text" name="task_description" class="form-control" id="description" aria-describedby="emailHelp"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="courseCode" class="form-label">Course Code</label>
-                        <input type="text" name="course_code" class="form-control" id="courseCode">
-                    </div>
-                    <div class="mb-3">
                         <label for="deadline" class="form-label">Deadline</label>
                         <input type="date" name="deadline" class="form-control" id="deadline">
                     </div>
@@ -60,7 +56,6 @@
                         <th scope="col">Date</th>
                         <th scope="col">Task Title</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Course Code</th>
                         <th scope="col">Deadline</th>
                         <th scope="col">Submissions</th>
                         <th scope="col">action</th>
@@ -72,7 +67,6 @@
                                 <td>{{$task->created_at}}</td>
                                 <td>{{$task->task_title}}</td>
                                 <td>{{$task->task_description}}</td>
-                                <td>{{$task->course_code}}</td>
                                 <td>{{$task->deadline}}</td>
                                 <td><a href="#">Check Submissions</a></td>
                                 <td class="d-flex mt-2">

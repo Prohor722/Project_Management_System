@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('topic_id')->references('topic_id')->on('topics')->cascadeOnUpdate();
             $table->foreign('t_id')->references('t_id')->on('teachers')->cascadeOnUpdate();
             $table->boolean('group_status')->nullable();
+            $table->string('password');
             $table->timestamps();
         });
     }

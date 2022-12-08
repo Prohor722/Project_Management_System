@@ -26,8 +26,6 @@ class NoticeController extends Controller
         $request->validate([
             'notice_description'=>'required',
             't_id'=>'required',
-            'course_code'=>'required',
-            'deadline'=>'required',
         ]);
 
         Notice::create($request->all());
@@ -47,11 +45,11 @@ class NoticeController extends Controller
     {
         $request['t_id']=$request->session()->get('user_id');
 
+        // dd($notice);
+
         $request->validate([
-            'notice_descprition'=>'required',
-            't_id'=>'required',
-            'course_code'=>'required',
-            'deadline'=>'required',
+            'notice_description'=>'required',
+            't_id'=>'required'
         ]);
 
         $notice->update($request->all());

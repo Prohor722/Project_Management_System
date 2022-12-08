@@ -32,6 +32,7 @@ class StudentController extends Controller
     {
         $request->validate([
             'student_id'=>"required|unique:students",
+            'email'=>"required|unique:students",
             'student_name'=>"required",
             'department'=>'required'
         ]);
@@ -52,6 +53,9 @@ class StudentController extends Controller
     {
         $request->validate([
             'student_id'=>['required',
+            Rule::unique('students')->ignore($student->id)
+        ],
+            'email'=>['required',
             Rule::unique('students')->ignore($student->id)
         ],
             'student_name'=>"required",

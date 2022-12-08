@@ -28,7 +28,7 @@ class GroupController extends Controller
     {
         request()->validate([
            'group_id'=>"required:unique:groups",
-            'topic_id'=>'required',
+            'topic_id'=>'required|exists:topics',
             'password'=>'required',
             'confirm_password'=>'required|same:password',
         ]);
@@ -36,11 +36,6 @@ class GroupController extends Controller
         $request['t_id']=$request->session()->get('user_id');
 
         Group::create($request->all());
-        Login::create([
-            "user_id"=>$request->group_id,
-            "password"=>$request->password,
-            "role"=>"student"
-        ]);
 
         return redirect('/teacher/groups');
     }
@@ -68,35 +63,16 @@ class GroupController extends Controller
             'topic_id'=>"required",
         ]);
 
-        $request->session()->forget(['id']);
-        $groupOldDetails = DB::table('groups')->find($id);
-        $old_group_id = $groupOldDetails->group_id;
-        $login = DB::table('logins')->where('user_id',$old_group_id)->first();
-        // dd($login);
-
-
         $pass = $request->password ;
         $cpass = $request->confirm_password;
         $new_group_id = $request->group_id;
 
-        if($pass && ($pass == $cpass) ){
-
-            $group->update($request->all());
-            DB::table('logins')->where('id', $login->id)
-            ->update(['password' => $pass]);
-
-            if($old_group_id !== $new_group_id){
-                DB::table('logins')->where('id', $login->id)
-                ->update(['user_id' => $new_group_id]);
-            }
+        if(!$pass || ($pass !== $cpass) ){
+            $request['password'] = $group->password;
         }
-        else if(!$pass && !$cpass){
-            $group->update($request->all());
-            if($old_group_id !== $new_group_id){
-                DB::table('logins')->where('id', $login->id)
-                ->update(['user_id' => $new_group_id]);
-            }
-        }
+
+        $group->update($request->all());
+
         return redirect('/teacher/groups');
     }
 
@@ -104,7 +80,6 @@ class GroupController extends Controller
     public function destroy(Group $group)
     {
         $group->delete();
-        DB::table('logins')->where('user_id',$group->group_id)->delete();
         return redirect('/teacher/groups');
     }
 }

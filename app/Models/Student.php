@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    protected $fillable=['student_id','student_name','department','status', 'email','password'];
+    protected $fillable=['student_id','student_name','department','status', 'email'];
 
     public function student_marks(){
         return $this->belongsTo(StudentMark::class, 'student_id', 'student_id');

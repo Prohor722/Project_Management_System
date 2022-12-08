@@ -83,7 +83,7 @@
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
-                            <a href="{{url('/teacher/groups/'.$group->id)}}" class="">
+                            <a href="{{url('/teacher/group/manage/'.$group->group_id)}}" class="">
                                 <button class="btn btn-secondary ms-1">Manage</button>
                             </a>
                         </td>

@@ -21,6 +21,10 @@
                 <h6 class="mt-3 d-inline">Email: </h6>
                 <span id="email"></span>
             </div>
+            <div>
+                <h6 class="mt-3 d-inline">Status: </h6>
+                <span id="email"></span>
+            </div>
         </div>
 
         <div class="col-md-9 py-3 px-5 bg  ">
@@ -45,15 +49,13 @@
                         <input type="text" class="form-control" name="email" id="email" value="{{old('email',$teacher->email)}}">
 
                         <label for="department" class="form-label">Department</label>
-                        <input type="text" class="form-control" name="dept" id="dept" value="{{old('dept',$teacher->dept)}}">
+                        <input type="text" class="form-control" name="department" id="department" value="{{old('department',$teacher->department)}}">
 
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Status</label>
-                            <select name="status" value='{{$teacher->status? true: false}}' class="form-control" id="exampleFormControlSelect1">
-                                <option value={{true}}>Active</option>
-                                <option value=""  @if(!$teacher->status) selected @endif>In-Active</option>
-                            </select>
-                        </div>
+                        <label for="exampleFormControlSelect1">Status</label>
+                        <select name="status" value='{{$teacher->status? true: false}}' class="form-control" id="exampleFormControlSelect1">
+                            <option value={{true}}>Active</option>
+                            <option value=""  @if(!$teacher->status) selected @endif>In-Active</option>
+                        </select>
 
                         <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" id="password" aria-describedby="emailHelp">

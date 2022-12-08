@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Model
 {
     use HasFactory;
-    protected $fillable=['t_id','t_name','dept', 'status','email'];
+    protected $fillable=['t_id','t_name','department', 'status','email', 'password'];
 
     public function groups()
     {
@@ -20,6 +20,6 @@ class Teacher extends Model
     }
     public function notices()
     {
-        return $this->hasMany(Notic::class, 't_id', 't_id');
+        return $this->hasMany(Notice::class, 't_id', 't_id');
     }
 }

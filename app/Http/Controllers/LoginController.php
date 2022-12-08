@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Login;
+use App\Models\Admin;
 
 class LoginController extends Controller
 {
@@ -48,7 +48,7 @@ class LoginController extends Controller
             $user = DB::table('admins')->where('admin_id', $req->user_id)
                         ->where('password', $req->password)
                         ->first();
-            if($user->admin_id == $req->user_id){
+            if($user && $user->admin_id == $req->user_id){
                 $access = Hash::make($user->admin_id.$role."prohor_banik");
                 session(["user_id"=>$user->admin_id, "role"=>$role, "access_token"=>$access]);
 
@@ -59,7 +59,7 @@ class LoginController extends Controller
             $user = DB::table('teachers')->where('t_id', $req->user_id)
                         ->where('password', $req->password)
                         ->first();
-            if($user->t_id == $req->user_id){
+            if($user && $user->t_id == $req->user_id){
                 $access = Hash::make($user->t_id.$role."prohor_banik");
                 session(["user_id"=>$user->t_id, "role"=>$role, "access_token"=>$access]);
 
@@ -70,7 +70,7 @@ class LoginController extends Controller
             $user = DB::table('students')->where('student_id', $req->user_id)
                         ->where('password', $req->password)
                         ->first();
-            if($user->student_id == $req->user_id){
+            if($user && $user->student_id == $req->user_id){
                 $access = Hash::make($user->student_id.$role."prohor_banik");
                 session(["user_id"=>$user->student_id, "role"=>$role, "access_token"=>$access]);
 
@@ -87,10 +87,11 @@ class LoginController extends Controller
     }
 
     public function admin(){
-        $data = DB::table('logins')->where('role', 'admin')->first();
+        $data = DB::table('admins')->get()->first();
 
+        // return $data;
         if(!$data){
-            Login::create(["user_id"=>"admin","password"=>"123","role"=>"admin"]);
+            Admin::create(["admin_id"=>"admin","password"=>"123","email"=>"admin"]);
         }
         return redirect('/');;
     }

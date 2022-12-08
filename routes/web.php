@@ -11,6 +11,8 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\GroupStudentController;
+use App\Http\Controllers\StudentMarkController;
 
 //Common Routes
 Route::get('/', [LoginController::class,'index'])->name('login.index');
@@ -44,6 +46,15 @@ Route::middleware(['teacher'])->group(function () {
 
     //groups
     Route::resource('/teacher/groups', GroupController::class);
+
+    //manage groupstudents
+    Route::get('/teacher/group/manage/{id}', [GroupStudentController::class, 'index']);
+    Route::post('/teacher/group/manage/{id}', [GroupStudentController::class, 'addStudent']);
+    Route::delete('/teacher/group/manage/{id}', [GroupStudentController::class, 'destroy']);
+
+    //manage student marks
+    Route::get('/teacher/group/manage/marks/{id}', [StudentMarkController::class, 'index']);
+
     //Topic
     Route::resource('/teacher/topic', TopicController::class);
     //Notice

@@ -9,15 +9,7 @@
                     <h4 class="mb-3 text-center">Add Notice</h4>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Notice Description</label>
-                        <textarea type="email" name="notice_description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">{{old('notice_description')}}</textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Course Code</label>
-                        <input type="text" name="course_code" class="form-control" value="{{old('course_code')}}" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Deadline</label>
-                        <input type="date" name="deadline" class="form-control" value="{{old('deadline')}}" id="exampleInputPassword1">
+                        <textarea type="text" name="notice_description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">{{old('notice_description')}}</textarea>
                     </div>
                     <button type="submit" class="btn btn-info">Add</button>
                 </form>
@@ -31,8 +23,6 @@
                     <thead>
                     <tr>
                         <th scope="col">Date</th>
-                        <th scope="col">Deadline</th>
-                        <th scope="col">Subject</th>
                         <th scope="col">Notice Description</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -42,8 +32,6 @@
 
                         <tr class="">
                             <td>{{$notice->created_at}}</td>
-                            <td>{{$notice->deadline}}</td>
-                            <td>{{$notice->course_code}}</td>
                             <td class="text-break">{{$notice->notice_description}}</td>
                             <td class="">
                                 <div class="d-flex gap-2">

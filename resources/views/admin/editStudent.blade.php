@@ -11,11 +11,19 @@
             <h6 class="mt-3">Name: <span id="student-name"></span></h6>
             <div>
                 <h6 class="mt-3 d-inline">ID: </h6>
-                <span id="student-name"></span>
+                <span id="student_id"></span>
             </div>
             <div>
                 <h6 class="mt-3 d-inline">Department: </h6>
-                <span id="student-name"></span>
+                <span id="department"></span>
+            </div>
+            <div>
+                <h6 class="mt-3 d-inline">Email: </h6>
+                <span id="email"></span>
+            </div>
+            <div>
+                <h6 class="mt-3 d-inline">Status: </h6>
+                <span id="status"></span>
             </div>
         </div>
         <div class="col-md-9 px-5 bg  ">
@@ -34,6 +42,15 @@
 
                         <label for="department" class="form-label">Department</label>
                         <input type="text" id="department" name="department" value="{{old('department',$student->department)}}" class="form-control">
+
+                        <label for="department" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" value="{{old('email',$student->email)}}" aria-describedby="emailHelp">
+
+                        <label for="exampleFormControlSelect1">Status</label>
+                        <select name="status" class="form-control" id="exampleFormControlSelect1">
+                            <option value={{true}}>Active</option>
+                            <option value=""  @if(!$student->status) selected @endif>In-Active</option>
+                        </select>
 
                         <button type="submit" class="btn btn-success pb-3 my-5 w-100">Update</button>
                     </div>

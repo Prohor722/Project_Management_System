@@ -45,15 +45,13 @@
                         <input type="text" class="form-control" name="email" id="email">
 
                         <label for="department" class="form-label">Department</label>
-                        <input type="text" class="form-control" name="dept" id="dept">
+                        <input type="text" class="form-control" name="department" id="department">
 
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Group Status</label>
-                            <select name="status" class="form-control" id="exampleFormControlSelect1">
-                                <option value={{true}}>Active</option>
-                                <option value="">In-Active</option>
-                            </select>
-                        </div>
+                        <label for="exampleFormControlSelect1">Status</label>
+                        <select name="status" class="form-control" id="exampleFormControlSelect1">
+                            <option value={{true}}>Active</option>
+                            <option value="">In-Active</option>
+                        </select>
 
                         <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" id="password" aria-describedby="emailHelp">

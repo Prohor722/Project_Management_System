@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('department');
             $table->string('email')->unique();
             $table->boolean('status')->nullable();
-            $table->string('password');
             $table->timestamps();
         });
     }

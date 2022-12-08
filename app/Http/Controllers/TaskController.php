@@ -10,7 +10,7 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $id = $request->session()->get('user_id');
-        $tasks = Task::where('t_id',$id)->get();
+        $tasks = Task::all();
         return view('teacher.tasks',['tasks'=>$tasks]);
     }
     public function create()
@@ -19,13 +19,10 @@ class TaskController extends Controller
     }
     public function store(Request $request)
     {
-        $request['t_id']=$request->session()->get('user_id');
 
         $request->validate([
             'task_title'=>"required",
             'task_description'=>"required",
-            't_id'=>"required",
-            'course_code'=>"required",
             'deadline'=>"required",
         ]);
 
@@ -52,12 +49,10 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $request['t_id']=$request->session()->get('user_id');
-
         $request->validate([
-            'topic_id'=>'required',
-            'topic_description'=>'required',
-            't_id'=>'required'
+            'task_title'=>"required",
+            'task_description'=>"required",
+            'deadline'=>"required",
         ]);
 
         $task->update($request->all());

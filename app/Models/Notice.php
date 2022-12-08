@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notice extends Model
 {
     use HasFactory;
-    protected $fillable=['notice_description', 'course_code', 't_id', 'deadline'];
+    protected $fillable=['notice_description', 't_id'];
 
     public function teachers()
     {

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('student_marks', function (Blueprint $table) {
             $table->id();
-            $table->string('student_id');
+            $table->string('student_id')->unique();
             $table->foreign('student_id')->references('student_id')->on('students')
             ->cascadeOnUpdate()->cascadeOnDelete();
             $table->double('po1', 4, 2)->nullable()->default(00.00);

@@ -3,83 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Models\GroupStudent;
+use App\Models\Group;
+use App\Models\GroupLink;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class GroupStudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index($group_id)
     {
-        //
-    }
+        $groupStudents = GroupStudent::where('group_id',$group_id)->get();
+        $group_links = GroupLink::where('group_id',$group_id)->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('teacher.manageGroups',
+        ['group_students'=>$groupStudents,
+        'group_id'=>$group_id,
+        'group_links'=>$group_links
+    ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function addStudent(Request $request, $group_id)
     {
-        //
+        $request->validate([
+            'student_id'=>"required|unique:group_students|exists:students"
+        ]);
+
+        GroupStudent::create(['group_id'=>$group_id, 'student_id'=>$request->student_id]);
+        return redirect('/teacher/group/manage/'.$group_id);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\GroupStudent  $groupStudent
-     * @return \Illuminate\Http\Response
-     */
-    public function show(GroupStudent $groupStudent)
+    public function destroy($id)
     {
-        //
-    }
+        $group_id = GroupStudent::where('id',$id)->value('group_id');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\GroupStudent  $groupStudent
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(GroupStudent $groupStudent)
-    {
-        //
-    }
+        GroupStudent::where('id',$id)->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\GroupStudent  $groupStudent
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, GroupStudent $groupStudent)
-    {
-        //
-    }
+        $data = GroupStudent::where('group_id',$group_id)->first();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\GroupStudent  $groupStudent
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(GroupStudent $groupStudent)
-    {
-        //
+        if($data){
+            return redirect('/teacher/group/manage/'.$group_id);
+        }
+
+        return redirect('/teacher/groups');
     }
 }

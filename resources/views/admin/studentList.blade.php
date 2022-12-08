@@ -45,7 +45,8 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Student Name</th>
-                    <th scope="col">Dept.</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
@@ -55,6 +56,7 @@
                             <td>{{$student->student_id}}</td>
                             <td>{{$student->student_name}}</td>
                             <td>{{$student->department}}</td>
+                            <td>{{ ($student->status)? "Active" : "In-Active"}}</td>
                             <td class="d-flex mt-2">
                                 <a href="{{url('/admin/student/'.$student->id)}}" class="">
                                     <button class="btn btn-info me-1">Edit</button>

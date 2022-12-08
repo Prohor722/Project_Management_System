@@ -60,7 +60,7 @@
                         <tr>
                             <td>{{$teacher->t_id}}</td>
                             <td>{{$teacher->t_name}}</td>
-                            <td>{{$teacher->dept}}</td>
+                            <td>{{$teacher->department}}</td>
                             <td>{{ ($teacher->status)? "Active" : "In-Active"}}</td>
                             <td class="d-flex mt-2">
                                 <a href="{{url('/admin/teacher/'.$teacher->id)}}" class="">

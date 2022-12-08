@@ -3,81 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Models\StudentMark;
+use App\Models\Student;
+use App\Models\GroupStudent;
 use Illuminate\Http\Request;
 
 class StudentMarkController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index($id)
     {
-        //
+        $groupStudents = GroupStudent::where('group_id',$id)->get();
+        $studentDetails;
+        $i= 0;
+        foreach ($groupStudents as $group_student) {
+            $student_id = $group_student->student_id;
+            $student = Student::where('student_id',$student_id)->with('student_marks')->get();
+            $studentDetails[$i] = $student[0];
+            $i++;
+        }
+        // return $studentDetails[0]->student_marks->po1;
+
+        return view('teacher.manageStudentMarks',['studentDetails'=>$studentDetails]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\StudentMark  $studentMark
-     * @return \Illuminate\Http\Response
-     */
     public function show(StudentMark $studentMark)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\StudentMark  $studentMark
-     * @return \Illuminate\Http\Response
-     */
     public function edit(StudentMark $studentMark)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\StudentMark  $studentMark
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, StudentMark $studentMark)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\StudentMark  $studentMark
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(StudentMark $studentMark)
     {
         //

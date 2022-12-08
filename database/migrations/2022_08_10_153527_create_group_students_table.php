@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('group_students', function (Blueprint $table) {
             $table->id();
             $table->string('group_id');
-            $table->string('student_id');
+            $table->string('student_id')->unique();
             $table->foreign('group_id')->references('group_id')->on('groups')
             ->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('student_id')->references('student_id')->on('students')
