@@ -50,7 +50,7 @@
                             @foreach($topics as $topic)
                                 <tr>
                                     <td>{{$topic->topic_id}}</td>
-                                    <td>{{$topic->topic_description}}</td>
+                                    <td class="text-break">{{$topic->topic_description}}</td>
                                     <td class="d-flex">
                                         <a href="{{url('/teacher/topic/'.$topic->id)}}" class="">
                                             <button class="btn btn-info me-1">Edit</button>

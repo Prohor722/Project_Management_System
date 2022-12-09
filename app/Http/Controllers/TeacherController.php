@@ -28,7 +28,7 @@ class TeacherController extends Controller
             't_name'=>"required",
             'department'=>'required',
             'email'=>"required|unique:teachers",
-            'password'=>'required',
+            'password'=>'required|min:4',
             'confirm_password'=>'required|same:password',
         ]);
 

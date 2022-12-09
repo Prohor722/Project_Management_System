@@ -14,7 +14,7 @@
 
             <div class="col-md-4 px-3 pt-5">
                 <h4 class="mb-3 text-center">Group Members</h4>
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                     <tr class="border">
                         <th scope="col">No.</th>
@@ -61,7 +61,7 @@
 
             <div class="col-md-4 px-4 pt-5">
                 <h4 class="mb-3 text-center">Group Members</h4>
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                     <tr class="border">
                         <th scope="col">No.</th>

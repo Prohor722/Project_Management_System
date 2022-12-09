@@ -65,8 +65,8 @@
                         @foreach($tasks as $task)
                             <tr>
                                 <td>{{$task->created_at}}</td>
-                                <td>{{$task->task_title}}</td>
-                                <td>{{$task->task_description}}</td>
+                                <td class="text-break">{{$task->task_title}}</td>
+                                <td class="text-break">{{$task->task_description}}</td>
                                 <td>{{$task->deadline}}</td>
                                 <td><a href="#">Check Submissions</a></td>
                                 <td class="d-flex mt-2">

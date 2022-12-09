@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('marks', function (Blueprint $table) {
             $table->id();
-            $table->double('po1', 4, 2)->nullable()->default(00.00);
-            $table->double('po2', 4, 2)->nullable()->default(00.00);
+            $table->double('po1', 4, 2)->nullable()->default(01.00);
+            $table->double('po2', 4, 2)->nullable()->default(01.00);
             $table->double('po3', 4, 2)->nullable()->default(00.00);
             $table->double('po4', 4, 2)->nullable()->default(00.00);
             $table->double('po5', 4, 2)->nullable()->default(00.00);

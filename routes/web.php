@@ -13,6 +13,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\GroupStudentController;
 use App\Http\Controllers\StudentMarkController;
+use App\Http\Controllers\MarksController;
 
 //Common Routes
 Route::get('/', [LoginController::class,'index'])->name('login.index');
@@ -28,10 +29,11 @@ Route::middleware(['admin'])->group(function () {
     //students
     Route::resource('/admin/student', StudentController::class);
     //teachers
-    Route::view('/admin/addTeacher', 'admin.addTeacher')->name('add-teacher');
+    // Route::view('/admin/addTeacher', 'admin.addTeacher')->name('add-teacher');
     Route::resource('/admin/teacher', TeacherController::class);
     //marks
-    Route::view('/admin/marks', 'admin.marks')->name('admin-marks');
+    Route::get('/admin/marks', [MarksController::class, 'index'])->name('admin-marks');
+    Route::put('/admin/marks/{id}', [MarksController::class, 'update']);
 });
 
 
@@ -53,7 +55,10 @@ Route::middleware(['teacher'])->group(function () {
     Route::delete('/teacher/group/manage/{id}', [GroupStudentController::class, 'destroy']);
 
     //manage student marks
-    Route::get('/teacher/group/manage/marks/{id}', [StudentMarkController::class, 'index']);
+    Route::get('/teacher/group/manage/marks/{group_id}', [StudentMarkController::class, 'index']);
+    Route::post('/teacher/group/student/mark/add', [StudentMarkController::class, 'addMark']);
+    Route::get('/teacher/group/student/mark/update/{student_id}', [StudentMarkController::class, 'show']);
+    Route::put('/teacher/group/student/mark/update/{student_id}', [StudentMarkController::class, 'update']);
 
     //Topic
     Route::resource('/teacher/topic', TopicController::class);
