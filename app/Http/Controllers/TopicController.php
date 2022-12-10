@@ -3,39 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Topic;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class TopicController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $id=$request->session()->get('user_id');
-        $topics = Topic::where('t_id', $id)->get();
+        $topics = Topic::where('t_id', $id)->paginate(5);
         return view('teacher.topic',['topics'=>$topics]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request['t_id']=$request->session()->get('user_id');
@@ -51,24 +35,11 @@ class TopicController extends Controller
         return redirect('/teacher/topic');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
     public function show(Topic $topic)
     {
-        $topics = Topic::all();
+        $topics = Topic::paginate(5);
         return view('teacher.topicEdit',['topics'=>$topics, 'topic'=>$topic]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Topic $topic)
     {
         //
@@ -88,9 +59,16 @@ class TopicController extends Controller
         $topic->update($request->all());
         return redirect('/teacher/topic');
     }
-    public function destroy(Topic $topic)
+    public function destroy(Topic $topic, Request $request)
     {
-        $topic->delete();
+        $groupExists = Group::where('topic_id',$topic->topic_id)->first();
+
+        if($groupExists){
+            $request->session()->flash('topicError', ['Group exists under this Topic',$topic->topic_id]);
+        }
+        else{
+            $topic->delete();
+        }
         return redirect('/teacher/topic');
     }
 }

@@ -58,6 +58,7 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th scope="col">No.</th>
                         <th scope="col">Group ID</th>
                         <th scope="col">Topic ID</th>
                         <th scope="col">Teacher's ID</th>
@@ -66,8 +67,10 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <?php $i = ($groups->currentPage()-1) * 5; ?>
                     @foreach($groups as $group)
                         <tr>
+                            <td>{{++$i}}</td>
                             <td>{{$group->group_id}}</td>
                             <td>{{$group->topic_id}}</td>
                             <td>{{$group->t_id}}</td>
@@ -92,6 +95,9 @@
 
                     </tbody>
                 </table>
+                <div class="mt-4">
+                    {{$groups->links()}}
+                </div>
             </div>
         </div>
     </div>

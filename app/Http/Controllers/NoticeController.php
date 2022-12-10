@@ -10,7 +10,7 @@ class NoticeController extends Controller
     public function index(Request $request)
     {
         $id = $request->session()->get('user_id');
-        $notices = Notice::where('t_id',$id)->get();
+        $notices = Notice::where('t_id',$id)->paginate(5);
         return view('teacher.notice',['notices'=>$notices]);
     }
 
@@ -34,7 +34,7 @@ class NoticeController extends Controller
 
     public function show(Notice $notice)
     {
-        $notices= Notice::all();
+        $notices= Notice::paginate(5);
         return view('teacher.noticeEdit',['notices'=>$notices, 'notice'=>$notice]);
     }
     public function edit(Notice $notice)

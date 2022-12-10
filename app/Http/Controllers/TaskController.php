@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\GroupLink;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -10,7 +11,7 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $id = $request->session()->get('user_id');
-        $tasks = Task::all();
+        $tasks = Task::paginate(5);
         return view('teacher.tasks',['tasks'=>$tasks]);
     }
     public function create()
@@ -31,7 +32,7 @@ class TaskController extends Controller
     }
     public function show(Task $task)
     {
-        $tasks = Task::all();
+        $tasks = Task::paginate(5);
         return view('teacher.taskEdit',['tasks'=>$tasks, 'task'=>$task]);
     }
 
@@ -39,14 +40,6 @@ class TaskController extends Controller
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Task $task)
     {
         $request->validate([
@@ -58,16 +51,16 @@ class TaskController extends Controller
         $task->update($request->all());
         return redirect('/teacher/tasks');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Task $task)
     {
-        $task->delete();
+        $groupLinkExists = GroupLink::where('task_id',$task->id)->first();
+
+        if($groupLinkExists){
+            $request->session()->flash('taskError', ['Group assignments exists under this task',$task->id]);
+        }
+        else{
+            $task->delete();
+        }
         return redirect('/teacher/tasks');
     }
 }

@@ -46,7 +46,7 @@ class StudentMarkController extends Controller
             'po12'=>"required|gte:0|lte:$marks->po12",
         ]);
         $sum=0;
-        for($i=1; $i<=12; $i++){
+        for($i; $i<=12; $i++){
             $sum = $sum + $request['po'.$i];
         }
         $request['total'] = $sum;

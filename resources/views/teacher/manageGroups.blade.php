@@ -75,7 +75,7 @@
                     <?php $i =1; ?>
                     @foreach($group_links as $link)
                         <tr class="border">
-                            <td>{{$i++}}</td>
+                            <td>{{++$i}}</td>
                             <td>{{$link->task_id}}</td>
                             <td><a href='{{$link->link}}' target="_blank">Check</a></td>
                         </tr>
@@ -86,70 +86,6 @@
             </div>
         </div>
 
-        {{-- @foreach ($group_students as $group_student)
-            {{$group_student->students->student_name}}
-        @endforeach --}}
-        {{-- Bottom Sections  --}}
-        <div class="row">
-            <div class="col-md-6">
-                {{-- <div class="col-md-4 px-4 pt-5">
-                    <h4 class="mb-3 text-center">Student Marks</h4>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">No.</th>
-                            <th scope="col">Student ID</th>
-                            <th scope="col">po1</th>
-                            <th scope="col">po2</th>
-                            <th scope="col">po3</th>
-                            <th scope="col">po4</th>
-                            <th scope="col">po5</th>
-                            <th scope="col">po6</th>
-                            <th scope="col">po7</th>
-                            <th scope="col">po8</th>
-                            <th scope="col">po9</th>
-                            <th scope="col">po10</th>
-                            <th scope="col">po11</th>
-                            <th scope="col">po12</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php $i =1; ?>
-                        @foreach($student_marks as $marks)
-                            <tr class="border">
-                                <td>{{$i++}}</td>
-                                <td>UG02-41-16-046</td>
-                                <td>04</td>
-                                <td>01</td>
-                                <td>04</td>
-                                <td>03</td>
-                                <td>09</td>
-                                <td>04</td>
-                                <td>05</td>
-                                <td>08</td>
-                                <td>07</td>
-                                <td>04</td>
-                                <td>04</td>
-                                <td>06</td>
-                                <td>74</td>
-                                <td>
-                                    <form action="/teacher/group/manage/{{$gs->id}}" method="POST">
-                                        @method('put')
-                                        @csrf
-                                        <button type="submit" class="btn btn-success">Update</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-
-                        </tbody>
-                    </table>
-                </div> --}}
-            </div>
-            <div class="col-md-6"></div>
-        </div>
     </div>
 
 

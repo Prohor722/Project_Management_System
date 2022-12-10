@@ -15,7 +15,7 @@ class GroupController extends Controller
     {
         $id = $request->session()->get('user_id');
 
-        $groups = Group::where('t_id', $id)->get();
+        $groups = Group::where('t_id', $id)->paginate(5);
         return view('teacher/groups',["groups"=>$groups]);
     }
 
@@ -42,7 +42,7 @@ class GroupController extends Controller
 
     public function show(Group $group, Request $request)
     {
-        $groups = Group::all();
+        $groups = Group::paginate(5);
         $request->session()->put('id', $group->id);
         return view('teacher.groupEdit',["groups"=>$groups, 'group'=>$group]);
     }

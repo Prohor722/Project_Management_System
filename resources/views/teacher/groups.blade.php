@@ -5,6 +5,7 @@
     <div class="container-fluid">
 
         <div class="row">
+
             <div class="col-md-3 bg bg-light py-5 left-container">
 
             <!-- Add group  -->
@@ -44,7 +45,7 @@
 
 
             </div>
-            <div class="col-md-9 bg   py-3 right-container">
+            <div class="col-md-9 bg py-3 right-container">
 
                 <!-- Search bar  -->
                 <form class="d-flex align-items-center ms-auto mb-1 border rounded-pill" id="search">
@@ -53,9 +54,10 @@
                 </form>
 
                 <!-- Group Table  -->
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th scope="col">No.</th>
                         <th scope="col">Group ID</th>
                         <th scope="col">Topic ID</th>
                         <th scope="col">Teacher's ID</th>
@@ -64,8 +66,10 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <?php $i = ($groups->currentPage()-1) * 5; ?>
                     @foreach($groups as $group)
                     <tr>
+                        <td>{{++$i}}</td>
                         <td>{{$group->group_id}}</td>
                         <td>{{$group->topic_id}}</td>
                         <td>{{$group->t_id}}</td>
@@ -91,6 +95,10 @@
 
                     </tbody>
                 </table>
+
+                <div class="mt-4">
+                    {{$groups->links()}}
+                </div>
             </div>
         </div>
     </div>

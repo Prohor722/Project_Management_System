@@ -14,3 +14,9 @@ header{
 .status-icon{
     margin-left: 20px;
 }
+
+.full-height{
+    overflow-y:auto;
+    height: 86vh;
+}
+

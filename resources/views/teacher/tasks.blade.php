@@ -30,17 +30,8 @@
                     <button type="submit" class="btn btn-info">Submit</button>
                 </form>
 
-                <!-- Previous Task  -->
-                <!-- <h4 class="mt-5 mb-3 text-center">Previous Tasks</h4>
-                <ul>
-                  <li class="fw-bold">Project Report<i class="fas fa-circle text-success ms-2"></i></li>
-                  <li>Project Proposal</li>
-                  <li>Project Presentation Slide</li>
-                  <li>Project Demo</li>
-                </ul> -->
-
             </div>
-            <div class="col-md-9 bg   pt-lg-3 pb-5 right-container">
+            <div class="col-md-9 pt-lg-3 pb-3 right-container">
 
                 <!-- Search bar  -->
                 <form class="d-flex align-items-center ms-auto mb-3 border rounded-pill" id="search">
@@ -53,6 +44,7 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th scope="col">No.</th>
                         <th scope="col">Date</th>
                         <th scope="col">Task Title</th>
                         <th scope="col">Description</th>
@@ -62,73 +54,43 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <?php $i= ($tasks->currentPage()-1) * 5; ?>
                         @foreach($tasks as $task)
                             <tr>
+                                <td>{{++$i}}</td>
                                 <td>{{$task->created_at}}</td>
                                 <td class="text-break">{{$task->task_title}}</td>
                                 <td class="text-break">{{$task->task_description}}</td>
                                 <td>{{$task->deadline}}</td>
                                 <td><a href="#">Check Submissions</a></td>
-                                <td class="d-flex mt-2">
-                                    <a href="{{url('/teacher/tasks/'.$task->id)}}" class="">
-                                        <button class="btn btn-info me-1">Edit</button>
-                                    </a>
-                                    <form action="/teacher/tasks/{{$task->id}}" method="POST">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit"
-                                        onclick="return confirm('Are you sure you want to delete this task: {{$task->task_title}} ?')"
-                                        class="btn btn-danger">Delete</button>
-                                    </form>
+                                <td class="mt-2">
+                                    <div class="d-flex">
+                                        <a href="{{url('/teacher/tasks/'.$task->id)}}" class="">
+                                            <button class="btn btn-info me-1">Edit</button>
+                                        </a>
+                                        <form action="/teacher/tasks/{{$task->id}}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit"
+                                            onclick="return confirm('Are you sure you want to delete this task: {{$task->task_title}} ?')"
+                                            class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                    @if(session('taskError') && session('taskError')[1]==$task->id)
+                                    <p class="text-danger mt-1">{{session('taskError')[0]}}</p>
+                                    @endif
+
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+
+                <div class="mt-4">
+                    {{$tasks->links()}}
+                </div>
             </div>
 
-            <!-- Group Submissions   -->
-            {{-- <div class="col-md-3 bg bg-light py-3 right-container">
-                <h4 class="mt-1 mb-3">Project Proposal</h4>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Group ID</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>GCS-04125</td>
-                        <td class="text-success"><i class="fas fa-circle status-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td>GCS-04125</td>
-                        <td class="text-danger"><i class="fas fa-circle status-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td>GCS-04125</td>
-                        <td class="text-success"><i class="fas fa-circle status-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td>GCS-04125</td>
-                        <td class="text-success"><i class="fas fa-circle status-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td>GCS-04125</td>
-                        <td class="text-success"><i class="fas fa-circle status-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td>GCS-04125</td>
-                        <td class="text-danger"><i class="fas fa-circle status-icon"></i></td>
-                    </tr>
-                    <tr>
-                        <td>GCS-04125</td>
-                        <td class="text-danger"><i class="fas fa-circle status-icon"></i></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div> --}}
         </div>
     </div>
 

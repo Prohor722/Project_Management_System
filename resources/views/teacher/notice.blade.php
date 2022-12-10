@@ -22,15 +22,18 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th scope="col">No.</th>
                         <th scope="col">Date</th>
                         <th scope="col">Notice Description</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                        <?php $i = ($notices->currentPage()-1) * 5; ?>
                     @foreach($notices as $notice)
 
                         <tr class="">
+                            <td>{{++$i}}</td>
                             <td>{{$notice->created_at}}</td>
                             <td class="text-break">{{$notice->notice_description}}</td>
                             <td class="">
@@ -54,6 +57,10 @@
 
                     </tbody>
                 </table>
+
+                <div class="mt-4">
+                    {{$notices->links()}}
+                </div>
             </div>
         </div>
     </div>

@@ -2,10 +2,12 @@
 
 @section('admin_content')
 
-    <div class="row g-0">
+<div class="container-fluid">
+
+    <div class="row full-height">
 
         <!-- Student Information section  -->
-        <div class="col-md-3 bg-light d-flex flex-column align-items-center p-3 short-text">
+        <div class="col-md-3 bg-light d-flex flex-column align-items-center p-3">
             <img id="info-img" class="mb-3 mt-5 w-50" src="{{asset('/images/users/student.jpg')}}">
             <h3>Student's Information</h3>
             <h6 class="mt-3">Name: <span id="student-name">Neyamul haque al baker sinha</span></h6>
@@ -22,27 +24,32 @@
                 <span id="student-name">CSE</span>
             </div>
         </div>
-        <div class="col-md-9 py-3 px-5 bg  ">
+
+        <!-- Students Table -->
+        <div class="col-md-9 px-5">
 
             <div class="d-flex align-items-center">
 
-                {{-- Add Student Button  --}}
+                <!--Add Student Button -->
                 <a href="{{url('/admin/student/create')}}">
-                    <button class="btn btn-info">Add Student</button>
+                    <button class="btn btn-light border">Add Student</button>
                 </a>
 
                 <!-- Search bar  -->
-                <form class="d-flex align-items-center ms-auto my-5 w-50 border rounded-pill" id="search">
+                <form class="d-flex align-items-center ms-auto mt-3 mb-4 w-50 border rounded-pill" id="search">
                     <input class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn border-0 text-dark p-0" id="search-icon" type="submit"><i class="fas fa-search"></i></button>
+                    <button class="btn border-0 p-0" id="search-icon" type="submit">
+                        <img src="{{asset('/icons/search.svg')}}"
+                        alt="search-icon" style="height:18px; padding-bottom: 2px" />
+                    </button>
                 </form>
             </div>
 
             <!-- students list  -->
-
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th scope="col">No.</th>
                     <th scope="col">ID</th>
                     <th scope="col">Student Name</th>
                     <th scope="col">Department</th>
@@ -51,15 +58,23 @@
                 </tr>
                 </thead>
                 <tbody>
+                    <?php $i = ($students->currentPage()-1)*5; ?>
                     @foreach($students as $student)
                         <tr>
+                            <td>{{++$i}}</td>
                             <td>{{$student->student_id}}</td>
                             <td>{{$student->student_name}}</td>
                             <td>{{$student->department}}</td>
-                            <td>{{ ($student->status)? "Active" : "In-Active"}}</td>
-                            <td class="d-flex mt-2">
-                                <a href="{{url('/admin/student/'.$student->id)}}" class="">
-                                    <button class="btn btn-info me-1">Edit</button>
+                            <td class="text-success @if(!$student->status) text-danger @endif">
+                                {{ ($student->status)?
+                                    "Active" :
+                                    "In-Active"}}</td>
+                            <td class="d-flex">
+                                <a href="{{url('/admin/student/'.$student->id)}}">
+                                    <button class="btn btn-info">Info</button>
+                                </a>
+                                <a href="{{url('/admin/student/'.$student->id)}}" class="mx-1">
+                                    <button class="btn btn-secondary">Edit</button>
                                 </a>
                                 <form action="/admin/student/{{$student->id}}" method="POST">
                                     @method('delete')
@@ -74,8 +89,12 @@
 
                 </tbody>
             </table>
+
+            <div class="mt-2">
+                {{$students->links()}}
+            </div>
         </div>
     </div>
-    </div>
+</div>
 
 @endsection

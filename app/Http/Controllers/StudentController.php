@@ -8,22 +8,12 @@ use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::paginate(5);
         return view('admin.studentList',['students'=>$students]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.addStudent');
