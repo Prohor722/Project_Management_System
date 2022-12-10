@@ -23,28 +23,27 @@ class StudentMarkController extends Controller
         }
 
         $marks = Marks::get()->first();
-        // return $marks;
 
         return view('teacher.manageStudentMarks',['studentDetails'=>$studentDetails, 'marks'=>$marks]);
     }
 
     public function addMark(Request $request){
+
         $marks = Marks::get()->first();
-        // return $marks;
         $request->validate([
             'student_id'=>"required|unique:student_marks",
-            'po1'=>"required|gt:0|lte:$marks->po1",
-            'po2'=>"required|gt:0|lte:$marks->po2",
-            'po3'=>"required|gt:0|lte:$marks->po3",
-            'po4'=>"required|gt:0|lte:$marks->po4",
-            'po5'=>"required|gt:0|lte:$marks->po5",
-            'po6'=>"required|gt:0|lte:$marks->po6",
-            'po7'=>"required|gt:0|lte:$marks->po7",
-            'po8'=>"required|gt:0|lte:$marks->po8",
-            'po9'=>"required|gt:0|lte:$marks->po9",
-            'po10'=>"required|gt:0|lte:$marks->po10",
-            'po11'=>"required|gt:0|lte:$marks->po11",
-            'po12'=>"required|gt:0|lte:$marks->po12",
+            'po1'=>"required|gte:0|lte:$marks->po1",
+            'po2'=>"required|gte:0|lte:$marks->po2",
+            'po3'=>"required|gte:0|lte:$marks->po3",
+            'po4'=>"required|gte:0|lte:$marks->po4",
+            'po5'=>"required|gte:0|lte:$marks->po5",
+            'po6'=>"required|gte:0|lte:$marks->po6",
+            'po7'=>"required|gte:0|lte:$marks->po7",
+            'po8'=>"required|gte:0|lte:$marks->po8",
+            'po9'=>"required|gte:0|lte:$marks->po9",
+            'po10'=>"required|gte:0|lte:$marks->po10",
+            'po11'=>"required|gte:0|lte:$marks->po11",
+            'po12'=>"required|gte:0|lte:$marks->po12",
         ]);
         $sum=0;
         for($i=1; $i<=12; $i++){
@@ -60,13 +59,58 @@ class StudentMarkController extends Controller
         return redirect('/teacher/group/manage/marks/'.$group_id);
     }
 
-    public function show(StudentMark $studentMark)
+    public function show($id)
     {
-        //
+        $studentMark = StudentMark::where('student_id', $id)->first();
+        $group_id = GroupStudent::where('student_id', $id)->value('group_id');
+
+        $groupStudents = GroupStudent::where('group_id',$group_id)->get();
+        $studentsDetails;
+        $i= 0;
+        foreach ($groupStudents as $group_student) {
+            $student_id = $group_student->student_id;
+            $student = Student::where('student_id',$student_id)->with('student_marks')->get();
+            $studentsDetails[$i] = $student[0];
+            $i++;
+        }
+
+        $marks = Marks::get()->first();
+
+        // return $studentMark;
+
+        return view('teacher.manageStudentMarkEdit',
+        ['studentsDetails'=>$studentsDetails,
+            'marks'=>$marks,
+            'studentMark' =>$studentMark,
+        ]);
     }
 
-    public function update(Request $request, StudentMark $studentMark)
+    public function update($id, Request $request)
     {
-        //
+        $marks = Marks::get()->first();
+        $request['student_id'] = $id;
+
+        $request->validate([
+            'student_id'=>"required",
+            'po1'=>"required|gte:0|lte:$marks->po1",
+            'po2'=>"required|gte:0|lte:$marks->po2",
+            'po3'=>"required|gte:0|lte:$marks->po3",
+            'po4'=>"required|gte:0|lte:$marks->po4",
+            'po5'=>"required|gte:0|lte:$marks->po5",
+            'po6'=>"required|gte:0|lte:$marks->po6",
+            'po7'=>"required|gte:0|lte:$marks->po7",
+            'po8'=>"required|gte:0|lte:$marks->po8",
+            'po9'=>"required|gte:0|lte:$marks->po9",
+            'po10'=>"required|gte:0|lte:$marks->po10",
+            'po11'=>"required|gte:0|lte:$marks->po11",
+            'po12'=>"required|gte:0|lte:$marks->po12",
+        ]);
+
+        unset($request['_token'],$request['_method']);
+        StudentMark::where('student_id',$id)->update($request->all());
+
+        $group_id = GroupStudent::where('student_id', $id)->value('group_id');
+
+        return redirect('/teacher/group/manage/marks/'.$group_id);
     }
 }

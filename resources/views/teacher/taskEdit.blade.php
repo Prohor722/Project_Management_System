@@ -76,7 +76,9 @@
                                     <form action="/teacher/tasks/{{$task->id}}" method="POST">
                                         @method('delete')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit"
+                                        onclick="return confirm('Are you sure you want to delete this task: {{$task->task_title}} ?')"
+                                        class="btn btn-danger">Delete</button>
                                     </form>
                                 </td>
                             </tr>

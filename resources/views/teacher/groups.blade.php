@@ -3,14 +3,10 @@
 @section('teacher_content')
 
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-md-3 bg bg-light py-5 left-container">
 
-
-
-                @foreach($errors->all() as $error)
-                    <p>{{$error}}</p>
-            @endforeach
             <!-- Add group  -->
                 <form class="" action="/teacher/groups" method="POST">
                     @csrf
@@ -81,8 +77,11 @@
                             <form action="/teacher/groups/{{$group->id}}" method="POST">
                                 @method('delete')
                                 @csrf
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button  class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to delete {{$group->group_id}} ?')"
+                                type="submit">Delete</button>
                             </form>
+
                             <a href="{{url('/teacher/group/manage/'.$group->group_id)}}" class="">
                                 <button class="btn btn-secondary ms-1">Manage</button>
                             </a>
@@ -97,4 +96,22 @@
     </div>
 
 
+@endsection
+
+@section('scripts')
+    <script>
+
+        $(document).ready(function (){
+            $('.deleteBtn').click(function (e){
+                e.preventDefault();
+
+                var id = $(this).val();
+                $('#delete_item').val(id);
+
+                $('#deleteModal').modal('show');
+
+            });
+        });
+
+    </script>
 @endsection

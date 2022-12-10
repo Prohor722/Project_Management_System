@@ -58,7 +58,9 @@
                                         <form action="/teacher/topic/{{$topic->id}}" method="POST">
                                             @method('delete')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit"
+                                            onclick="return confirm('Are you sure you want to delete this topic: {{$topic->topic_id}} ?')"
+                                            class="btn btn-danger">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

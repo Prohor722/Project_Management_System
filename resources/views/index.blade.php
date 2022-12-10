@@ -32,7 +32,7 @@
 </header>
 <main>
     <div class="container-fluid">
-          <div class="row mt-5 g-0">
+          <div class="row mt-4 g-0">
             <div class="col-md-4 offset-md-4 mt-2 shadow p-5">
 
               <form class="" action="{{url('/login')}}" method="post" >
@@ -40,11 +40,19 @@
                 <h4 class="text-center">Log In</h4>
                 <div class="mb-3">
                   <label class="form-label">ID</label>
-                  <input class="form-control" type="text" name="user_id" >
+                  <input type="text" class="form-control
+                  @error('user_id') border border-danger @enderror" name="user_id" >
+
+                  @error('user_id')<p class="text-danger">{{$message}}</p> @enderror
+
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Password</label>
-                  <input class="form-control" type="password" name="password" >
+                  <input class="form-control
+                  @error('password') border border-danger @enderror" type="password" name="password" >
+
+                  @error('password')<p class="text-danger">{{$message}}</p> @enderror
+
                 </div>
 
                 <div class="mb-3">
@@ -57,7 +65,7 @@
                 </div>
 
 				<div class="w3-container">
-                  @if ($errors->any())
+                  {{-- @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -65,7 +73,7 @@
                             @endforeach
                         </ul>
                     </div>
-                  @endif
+                  @endif --}}
 
 				  @if(session('msg'))
 					<div class="alert alert-danger">{{session('msg')}}</div>

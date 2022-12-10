@@ -27,6 +27,7 @@ class TestController extends Controller
         // dd($request->session()->get('ambala'));
 
         // return $request->session()->get('role')? "ace": "nai";
+        // session(["test_check"=>$value]);
 
         return $request->session()->all();
     }

@@ -38,8 +38,8 @@ class LoginController extends Controller
 	{
         $role = $req->role;
 		$validatedData = $req->validate([
-			'user_id' => 'required|max:50',
-			'password' => 'required',
+			'user_id' => 'required|max:20',
+			'password' => 'required|min:4',
 			'role' => 'required',
 		]);
 
@@ -67,7 +67,7 @@ class LoginController extends Controller
             }
         }
         else if($role == 'student'){
-            $user = DB::table('students')->where('student_id', $req->user_id)
+            $user = DB::table('groups')->where('group_id', $req->user_id)
                         ->where('password', $req->password)
                         ->first();
             if($user && $user->student_id == $req->user_id){
@@ -91,7 +91,7 @@ class LoginController extends Controller
 
         // return $data;
         if(!$data){
-            Admin::create(["admin_id"=>"admin","password"=>"123","email"=>"admin"]);
+            Admin::create(["admin_id"=>"admin","password"=>"1234","email"=>"admin"]);
         }
         return redirect('/');;
     }

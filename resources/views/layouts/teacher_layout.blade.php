@@ -67,11 +67,14 @@
 </header>
 
     <main>
+
         @yield('teacher_content')
     </main>
 
 <footer>
+
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+
 </footer>
 </body>
 </html>

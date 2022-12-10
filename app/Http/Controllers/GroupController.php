@@ -27,9 +27,9 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-           'group_id'=>"required:unique:groups",
+           'group_id'=>"required|unique:groups",
             'topic_id'=>'required|exists:topics',
-            'password'=>'required',
+            'password'=>'required|min:4',
             'confirm_password'=>'required|same:password',
         ]);
 
@@ -61,6 +61,8 @@ class GroupController extends Controller
             Rule::unique('groups')->ignore($id)
         ],
             'topic_id'=>"required",
+            'password'=>"nullable|min:4",
+            'confirm_password'=>"nullable|min:4"
         ]);
 
         $pass = $request->password ;

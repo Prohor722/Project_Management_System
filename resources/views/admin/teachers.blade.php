@@ -69,7 +69,9 @@
                                 <form action="/admin/teacher/{{$teacher->id}}" method="POST">
                                     @method('delete')
                                     @csrf
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit"
+                                    onclick="return confirm('Are you sure you want to delete {{$teacher->t_id}} ?')"
+                                    class="btn btn-danger">Delete</button>
                                 </form>
                             </td>
                         </tr>
