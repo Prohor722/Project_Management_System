@@ -219,11 +219,9 @@
                             <td>{{$marks->po12}}</td>
                             <td>{{$marks->total}}</td>
                             <td>
-                                <form action="/teacher/group/manage/marks/update/{{$marks->id}}" method="POST">
-                                    @method('put')
-                                    @csrf
+                                <a href="/teacher/group/student/mark/update/{{$marks->student_id}}">
                                     <button type="submit" class="btn btn-success">Update</button>
-                                </form>
+                                </a>
                             </td>
                         </tr>
                         @endif
