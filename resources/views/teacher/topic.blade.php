@@ -6,23 +6,32 @@
         <div class="row">
             <div class="col-md-3 bg bg-light pt-5 full-height left-container">
 
-            @foreach($errors->all() as $error)
-                <p>{{$error}}</p>
-            @endforeach
             <!-- Add Topic  -->
                 <form action="/teacher/topic" method="POST">
                     @csrf
                     <h4 class="mb-3 text-center">Add Topic</h4>
                     <div class="mb-3">
                         <label class="form-label">Topic ID</label>
-                        <input type="text" class="form-control" name="topic_id" value="{{old('topic_id')}}">
+                        <input type="text" class="form-control
+                        @error('topic_id') border border-danger @enderror"
+                        name="topic_id" value="{{old('topic_id')}}">
+
+                        @error('topic_id')
+                            <p class="text-danger mt-1">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Topic Description</label>
-                        <input type="text" class="form-control" name="topic_description" value="{{old('topic_description')}}">
+                        <input type="text" class="form-control
+                        @error('topic_description') border border-danger @enderror"
+                        name="topic_description" value="{{old('topic_description')}}">
+
+                        @error('topic_description')
+                            <p class="text-danger mt-1">{{$message}}</p>
+                        @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-info">Add Topic</button>
+                    <button type="submit" class="btn btn-secondary">Add Topic</button>
                 </form>
 
 

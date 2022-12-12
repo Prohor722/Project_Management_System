@@ -84,7 +84,7 @@
                                     <option value="">In-Active</option>
                                 </select>
 
-                                <button type="submit" class="btn btn-info my-4 w-100">Submit</button>
+                                <button type="submit" class="btn btn-secondary my-4 w-100">Add</button>
                             </div>
 
                         </div>

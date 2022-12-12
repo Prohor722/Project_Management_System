@@ -6,19 +6,35 @@
 
         <div class="row">
 
-            <div class="col-md-3 bg bg-light pt-5 left-container full-height">
+            <div class="col-md-3 bg-light pt-3 left-container full-height">
 
             <!-- Add group  -->
-                <form class="" action="/teacher/groups" method="POST">
+                <form action="/teacher/groups" method="POST">
                     @csrf
-                    <h4 class="mb-3 text-center">Add Group</h4>
-                    <div class="mb-3">
-                        <label class="form-label">Group ID</label>
-                        <input type="text" name="group_id" class="form-control" value="{{old('group_id')}}">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Topic ID</label>
-                        <input type="text" class="form-control" name="topic_id" value="{{old('topic_id')}}">
+                    <h5 class="mb-3 text-center">Add Group</h5>
+                    <div class="d-flex gap-2 mb-3">
+
+                        <div>
+                            <label class="form-label">Group ID</label>
+                            <input type="text" name="group_id" class="form-control
+                            @error('group_id') border border-danger @enderror" value="{{old('group_id')}}">
+
+                            @error('group_id')
+                                <p class="text-danger pt-1">{{$message}}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label class="form-label">Topic ID</label>
+                            <input type="text" class="form-control
+                            @error('topic_id') border border-danger @enderror"
+                            name="topic_id" value="{{old('topic_id')}}">
+
+                            @error('topic_id')
+                                <p class="text-danger pt-1">{{$message}}</p>
+                            @enderror
+                        </div>
+
                     </div>
 
                     <div class="mb-3">
@@ -32,15 +48,27 @@
                     <div class="d-flex gap-2 mb-3">
                         <div>
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" value="">
+                            <input type="password" class="form-control
+                            @error('password') border border-danger @enderror"
+                            name="password" value="">
+
+                            @error('password')
+                            <p class="text-danger pt-1">{{$message}}</p>
+                            @enderror
                         </div>
                         <div>
                             <label class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" name="confirm_password">
+                            <input type="password" class="form-control
+                            @error('password') border border-danger @enderror"
+                            name="confirm_password">
+
+                            @error('confirm_password')
+                            <p class="text-danger pt-1">{{$message}}</p>
+                            @enderror
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-info">Submit</button>
+                    <button type="submit" class="btn px-5 btn-secondary">Add</button>
                 </form>
 
 

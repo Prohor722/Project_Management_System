@@ -59,4 +59,13 @@ class StudentController extends Controller
         $student->delete();
         return redirect("/admin/student");
     }
+
+    public function studentInfo($id){
+        $students = Student::paginate(5);
+        $student = Student::where('student_id', $id)->first();
+
+        return $student;
+
+        return view('admin.studentInfo',['students'=>$students, "student"=>$student]);
+    }
 }

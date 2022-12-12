@@ -36,11 +36,6 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{url('teacher/studentList')}}">
-                            Students
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{url('teacher/groups')}}">
                             Groups
                         </a>

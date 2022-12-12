@@ -8,26 +8,41 @@
             <!-- Add task  -->
             <div class="col-md-3 bg bg-light pt-5 full-height left-container">
 
-                @foreach($errors->all() as $error)
-                    <p>{{$error}}</p>
-                @endforeach
-
                 <form class="" action="/teacher/tasks/{{$task->id}}" method="POST">
                     @method("put")
                     @csrf
                     <h4 class="mb-3 text-center">Edit Task</h4>
                     <div class="mb-3">
                         <label for="taskTitle" class="form-label">Task Title</label>
-                        <input type="text" value="{{old('task_title',$task->task_title)}}" name="task_title" class="form-control" id="taskTitle" aria-describedby="emailHelp">
+                        <input type="text" value="{{old('task_title',$task->task_title)}}"
+                        name="task_title" class="form-control
+                        @error('task_title') border border-danger @enderror"
+                        id="taskTitle" aria-describedby="emailHelp">
+
+                        @error('task_title')
+                            <p class="text-danger mt-1">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea type="text" name="task_description" class="form-control" id="description" aria-describedby="emailHelp">{{old('task_description',$task->task_description)}}
+                        <textarea type="text" name="task_description" class="form-control
+                        @error('task_description') border border-danger @enderror" id="description"
+                        aria-describedby="emailHelp">{{old('task_description',$task->task_description)}}
                         </textarea>
+
+                        @error('task_description')
+                            <p class="text-danger mt-1">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="deadline" class="form-label">Deadline</label>
-                        <input type="date" value="{{old('deadline',$task->deadline)}}" name="deadline" class="form-control" id="deadline">
+                        <input type="date" value="{{old('deadline',$task->deadline)}}"
+                        name="deadline" class="form-control
+                        @error('deadline') border border-danger @enderror" id="deadline">
+
+                        @error('deadline')
+                            <p class="text-danger mt-1">{{$message}}</p>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-success">Update</button>
                 </form>

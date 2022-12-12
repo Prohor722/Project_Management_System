@@ -17,20 +17,20 @@
             <h4>Students Information</h4>
             <h6 class="mt-3">Name: <span id="student-name">Full Name</span></h6>
             <div>
-                <h6 class="mt-3 d-inline">ID: UG02-XX-XX-XXX</h6>
-                <span id="student_id"></span>
+                <h6 class="mt-3 d-inline">ID: {{$student->student_name}}</h6>
             </div>
             <div>
-                <h6 class="mt-3 d-inline">Department: CSE</h6>
-                <span id="department"></span>
+                <h6 class="mt-3 d-inline">Department: {{$student->department}}</h6>
             </div>
             <div>
-                <h6 class="mt-3 d-inline">Email: someone@mail.com</h6>
-                <span id="email"></span>
+                <h6 class="mt-3 d-inline">Email: {{$student->email}}</h6>
             </div>
             <div>
-                <h6 class="mt-3 d-inline">Status: Active/In-Active</h6>
-                <span id="status"></span>
+                <h6 class="mt-3 d-inline">Status:
+                    <span class="text-success @if(!$student->status) text-danger @endif">
+                        {{ ($student->status)? "Active" : "In-Active"}}
+                    </span>
+                </h6>
             </div>
         </div>
 

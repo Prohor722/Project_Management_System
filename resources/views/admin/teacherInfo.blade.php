@@ -10,23 +10,34 @@
         <div class="col-md-3 bg-light d-flex flex-column align-items-center p-3 full-height">
             <img id="info-img" class="mb-3 mt-5 w-50" src="{{asset('/images/users/Teacher.jpg')}}">
             <h3>Teacher's Information</h3>
-            <h6 class="mt-3">Name: <span id="student-name">Roktakin ahmed jobin bhuiyan</span></h6>
-            <div>
-                <h6 class="mt-3 d-inline">Status: </h6>
-                <span id="student-name" class="text-success">Active</span>
-            </div>
-            <div>
-                <h6 class="mt-3 d-inline">INS ID: </h6>
-                <span id="student-name">CS-0245158</span>
-            </div>
-            <div>
-                <h6 class="mt-3 d-inline">Department: </h6>
-                <span id="student-name">CSE</span>
-            </div>
-            <div>
-                <h6 class="mt-3 d-inline">Email: </h6>
-                <span id="student-name">Roktakin.ahmed@sub.edu.bd</span>
-            </div>
+
+            @if($teacher)
+
+                <h6 class="mt-3">Name: <span id="student-name">{{$teacher->t_name}}</span></h6>
+                <div>
+                    <h6 class="mt-3 d-inline">Status:
+                        <span class="text-success @if(!$teacher->status) text-danger @endif">
+                            {{ ($teacher->status)? "Active" : "In-Active"}}
+                        </span>
+                    </h6>
+
+                </div>
+                <div>
+                    <h6 class="mt-3 d-inline">INS ID: </h6>
+                    <span id="student-name">{{$teacher->t_id}}</span>
+                </div>
+                <div>
+                    <h6 class="mt-3 d-inline">Department: </h6>
+                    <span id="student-name">{{$teacher->department}}</span>
+                </div>
+                <div>
+                    <h6 class="mt-3 d-inline">Email: </h6>
+                    <span id="student-name">{{$teacher->email}}</span>
+                </div>
+
+            @else
+                <h5 class="text-danger">Sorry no data found</h5>
+            @endif
         </div>
 
 

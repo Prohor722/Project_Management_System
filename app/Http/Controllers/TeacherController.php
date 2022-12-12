@@ -79,4 +79,12 @@ class TeacherController extends Controller
         $teacher->delete();
         return redirect('/admin/teacher');
     }
+
+    public function teacherInfo($id){
+
+        $teachers = Teacher::paginate(5);
+        $teacher = Teacher::where('t_id',$id)->first();
+
+        return view('admin.teacherInfo',['teachers'=>$teachers, 'teacher'=>$teacher]);
+    }
 }

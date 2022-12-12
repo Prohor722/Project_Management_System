@@ -26,11 +26,15 @@ Route::get('/admin/create', [LoginController::class,'admin']);
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class,'index'])->name('admin.index');
+
     //students
     Route::resource('/admin/student', StudentController::class);
+    Route::get('/admin/student/info/{student_id}', [StudentController::class, 'studentInfo']);
+
     //teachers
-    // Route::view('/admin/addTeacher', 'admin.addTeacher')->name('add-teacher');
     Route::resource('/admin/teacher', TeacherController::class);
+    Route::get('/admin/teacher/info/{t_id}',[ TeacherController::class, 'teacherInfo']);
+
     //marks
     Route::get('/admin/marks', [MarksController::class, 'index'])->name('admin-marks');
     Route::put('/admin/marks/{id}', [MarksController::class, 'update']);

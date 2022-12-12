@@ -1,29 +1,49 @@
 @extends('layouts.admin_layout')
 
 @section('admin_content')
+<style>
+    .margin-b{
+        margin-bottom: 32px;
+    }
+</style>
 
-<div class="container-fluid">
+    <div class="container-fluid">
 
-    <div class="row full-height">
+        <div class="row">
 
-        <!-- Student Information section  -->
-        <div class="col-md-3 bg-light d-flex flex-column align-items-center p-3">
-            <img id="info-img" class="mb-3 mt-5 w-50" src="{{asset('/images/users/student.jpg')}}">
-            <h3>Student's Information</h3>
-            <h6 class="mt-3">Name: <span id="student-name">Neyamul haque al baker sinha</span></h6>
-            <div>
-                <h6 class="mt-3 d-inline">ID: </h6>
-                <span id="student-name">UG02-15-10-046</span>
+            <!-- Student Information section  -->
+            <div class="col-md-3 d-flex bg-light flex-column align-items-center px-3 py-4 full-height">
+                <img id="info-img" class="my-4 pt-4 w-50" src="{{asset('images/users/student.jpg')}}">
+                <h4>Students Information</h4>
+
+                @if($student)
+
+                    <h6 class="mt-3">Name: <span id="student-name">{{$student->student_name}}</span></h6>
+                    <div>
+                        <h6 class="mt-3 d-inline">ID: {{$student->student_id}}</h6>
+                        <span id="student_id"></span>
+                    </div>
+                    <div>
+                        <h6 class="mt-3 d-inline">Department: {{$student->department}}</h6>
+                        <span id="department"></span>
+                    </div>
+                    <div>
+                        <h6 class="mt-3 d-inline">Email: {{$student->email}}</h6>
+                        <span id="email"></span>
+                    </div>
+                    <div>
+                        <h6 class="mt-3 d-inline">Status:
+                            <span class="text-success @if(!$student->status) text-danger @endif">
+                                {{ ($student->status)? "Active" : "In-Active"}}
+                            </span>
+                        </h6>
+                    </div>
+
+                @else
+                    <h5 class="text-danger">Sorry no data found</h5>
+                @endif
             </div>
-            <div>
-                <h6 class="mt-3 d-inline">Status: </h6>
-                <span id="student-name" class="text-success">Active</span>
-            </div>
-            <div>
-                <h6 class="mt-3 d-inline">Department: </h6>
-                <span id="student-name">CSE</span>
-            </div>
-        </div>
+
 
         <!-- Students Table -->
         <div class="col-md-9 px-5">
@@ -96,7 +116,7 @@
                 {{$students->links()}}
             </div>
         </div>
+        </div>
     </div>
-</div>
 
 @endsection

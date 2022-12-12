@@ -55,7 +55,7 @@
                             <p class="text-danger p-2 mt-2 border border-danger">{{$message}}</p>
                             @enderror
                     </div>
-                    <button type="submit" class="btn btn-info">Add</button>
+                    <button type="submit" class="btn btn-secondary">Add</button>
                 </form>
             </div>
 

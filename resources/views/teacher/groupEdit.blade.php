@@ -4,25 +4,38 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 bg bg-light pt-5 left-container full-height">
+            <div class="col-md-3 bg bg-light pt-3 left-container full-height">
 
-
-
-            @foreach($errors->all() as $error)
-                    <p>{{$error}}</p>
-            @endforeach
             <!-- Edit group  -->
                 <form class="" action="/teacher/groups/{{$group->id}}" method="POST">
                     @method('put')
                     @csrf
-                    <h4 class="mb-3 text-center">Edit Group</h4>
-                    <div class="mb-3">
-                        <label class="form-label">Group ID</label>
-                        <input type="text" name="group_id" class="form-control" value="{{old("group_id",$group->group_id)}}">
+                    <h5 class="mb-3 text-center">Edit Group</h5>
+                    <div class="d-flex gap-2 mb-3">
+
+                        <div>
+                            <label class="form-label">Group ID</label>
+                            <input type="text" name="group_id" class="form-control
+                            @error('group_id') border border-danger @enderror"
+                            value="{{old("group_id",$group->group_id)}}">
+
+                            @error('group_id')
+                                    <p class="text-danger pt-1">{{$message}}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label class="form-label">Topic ID</label>
+                            <input type="text" class="form-control
+                            @error('topic_id') border border-danger @enderror"
+                            name="topic_id" value='{{old("topic_id",$group->topic_id)}}'>
+
+                            @error('topic_id')
+                                    <p class="text-danger pt-1">{{$message}}</p>
+                            @enderror
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Topic ID</label>
-                        <input type="text" class="form-control" name="topic_id" value='{{old("topic_id",$group->topic_id)}}'>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlSelect1">Group Status</label>
@@ -35,17 +48,30 @@
 
                         <div>
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" value='{{old("group_password",$group->group_password)}}'>
+                            <input type="password" class="form-control
+                            @error('password') border border-danger @enderror"
+                            name="password" value='{{old("group_password",$group->group_password)}}'>
+
+                            @error('password')
+                                    <p class="text-danger pt-1">{{$message}}</p>
+                            @enderror
                         </div>
 
                         <div>
                             <label class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" name="confirm_password" value='{{old("confirm_password",$group->group_password)}}'>
+                            <input type="password" class="form-control
+                            @error('confirm_password') border border-danger @enderror"
+                            name="confirm_password"
+                            value='{{old("confirm_password",$group->group_password)}}'>
+
+                            @error('confirm_password')
+                                    <p class="text-danger pt-1">{{$message}}</p>
+                            @enderror
                         </div>
 
                     </div>
 
-                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="submit" class="btn btn-success px-4">Update</button>
                 </form>
 
 

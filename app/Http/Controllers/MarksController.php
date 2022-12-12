@@ -13,7 +13,7 @@ class MarksController extends Controller
         $marks = Marks::get()->first();
 
         if(!$marks){
-            $data = ["po1"=>0,"po2"=>0,"po3"=>0,"po4"=>0,
+            $data = ["po1"=>"0","po2"=>"0","po3"=>0,"po4"=>0,
                 "po5"=>0,"po6"=>0,"po7"=>0,"po8"=>0,"po9"=>0,
                 "po10"=>0,"po11"=>0,"po12"=>0];
             Marks::create($data);

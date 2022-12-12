@@ -11,7 +11,13 @@
                     <h4 class="mb-3 text-center">Edit Notice</h4>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Notice Description</label>
-                        <textarea type="text" name="notice_description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">{{old('notice_description',$notice->notice_description)}}</textarea>
+                        <textarea type="text" name="notice_description" class="form-control
+                        @error('notice_description') border border-danger @enderror" id="exampleInputEmail1"
+                        aria-describedby="emailHelp">{{old('notice_description',$notice->notice_description)}}</textarea>
+
+                        @error('notice_description')
+                            <p class="text-danger mt-1">{{$message}}</p>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-success">Update</button>
                 </form>
