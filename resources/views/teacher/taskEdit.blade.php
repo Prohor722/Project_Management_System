@@ -6,7 +6,7 @@
         <div class="row">
 
             <!-- Add task  -->
-            <div class="col-md-3 bg bg-light py-5 left-container">
+            <div class="col-md-3 bg bg-light pt-5 full-height left-container">
 
                 @foreach($errors->all() as $error)
                     <p>{{$error}}</p>
@@ -42,7 +42,7 @@
                 </ul> -->
 
             </div>
-            <div class="col-md-9 bg   pt-lg-3 pb-5 right-container">
+            <div class="col-md-9 pt-3 px-5 right-container">
 
                 <!-- Search bar  -->
                 <form class="d-flex align-items-center ms-auto mb-3 border rounded-pill" id="search">

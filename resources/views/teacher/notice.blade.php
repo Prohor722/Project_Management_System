@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 bg bg-light py-5 lrft-container">
+            <div class="col-md-3 bg bg-light pt-5 full-height lrft-container">
                 <form class="pb-5 mb-3" action="/teacher/notice" method="POST">
                     <h4 class="mb-3 text-center">Add Notice</h4>
                     <div class="mb-3">
@@ -15,7 +15,7 @@
                 </form>
 
             </div>
-            <div class="col-md-9 bg   py-5 right-container">
+            <div class="col-md-9 pt-5 px-5 right-container">
 {{--                <div class="ms-auto">--}}
 {{--                    <a class="btn btn-dark m-2" href="/teacher/notice">New</a>--}}
 {{--                </div>--}}

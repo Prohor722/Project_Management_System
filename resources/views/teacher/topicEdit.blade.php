@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 bg bg-light py-5 left-container">
+            <div class="col-md-3 bg bg-light pt-5 full-height left-container">
 
 
 
@@ -12,7 +12,7 @@
                     <p>{{$error}}</p>
             @endforeach
             <!-- Add Topic  -->
-                <form class="mb-5 pb-5" action="/teacher/topic/{{$topic->id}}" method="POST">
+                <form action="/teacher/topic/{{$topic->id}}" method="POST">
                     @method('put')
                     @csrf
                     <h4 class="mb-3 text-center">Edit Topic</h4>
@@ -31,7 +31,7 @@
 
 
             </div>
-            <div class="col-md-9 bg   py-3 right-container">
+            <div class="col-md-9 pt-5 px-5 right-container">
 
             {{--                <!-- Search bar  -->--}}
             {{--                <form class="d-flex align-items-center ms-auto mb-1" id="search">--}}

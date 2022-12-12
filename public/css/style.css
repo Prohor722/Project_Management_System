@@ -16,7 +16,12 @@ header{
 }
 
 .full-height{
-    overflow-y:auto;
     height: 86vh;
 }
+
+.full-height-scroll{
+    overflow-y: auto;
+    height: 86vh;
+}
+
 

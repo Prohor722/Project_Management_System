@@ -7,10 +7,10 @@
         <div class="row d-flex align-items-center">
 
             <!-- Update Marks -->
-            <div class="col-md-4 bg-light px-4 pb-1 border">
+            <div class="col-md-4 bg-light px-4 pb-1 border full-height">
                 <h5 class="mb-3 text-center mt-4">Update</h5>
                 <hr/>
-                <form class="mb-5" action="/admin/marks/{{$marks->id}}" method="POST">
+                <form class="" action="/admin/marks/{{$marks->id}}" method="POST">
                     @method('put')
                     @csrf
                     <div class="d-flex gap-3 mb-3">

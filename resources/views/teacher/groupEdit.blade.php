@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 bg bg-light py-5 left-container">
+            <div class="col-md-3 bg bg-light pt-5 left-container full-height">
 
 
 
@@ -24,20 +24,25 @@
                         <label class="form-label">Topic ID</label>
                         <input type="text" class="form-control" name="topic_id" value='{{old("topic_id",$group->topic_id)}}'>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="exampleFormControlSelect1">Group Status</label>
                         <select value='{{$group->group_status? true: false}}' name="group_status" class="form-control" id="exampleFormControlSelect1">
                             <option value={{true}} selected>Active</option>
                             <option value="" @if(!$group->group_status) selected @endif>In-Active</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" value='{{old("group_password",$group->group_password)}}'>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirm_password" value='{{old("confirm_password",$group->group_password)}}'>
+                    <div class="d-flex gap-2 mb-3">
+
+                        <div>
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" value='{{old("group_password",$group->group_password)}}'>
+                        </div>
+
+                        <div>
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" name="confirm_password" value='{{old("confirm_password",$group->group_password)}}'>
+                        </div>
+
                     </div>
 
                     <button type="submit" class="btn btn-success">Update</button>
@@ -46,7 +51,7 @@
 
 
             </div>
-            <div class="col-md-9 bg   py-3 right-container">
+            <div class="col-md-9 bg px-5 pt-3 right-container">
 
                 <!-- Search bar  -->
                 <form class="d-flex align-items-center ms-auto border rounded-pill mb-1" id="search">

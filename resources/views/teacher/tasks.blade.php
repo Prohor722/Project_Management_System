@@ -6,7 +6,7 @@
         <div class="row">
 
             <!-- Add task  -->
-            <div class="col-md-3 bg bg-light py-5 left-container">
+            <div class="col-md-3 bg bg-light pt-5 full-height left-container">
 
                 @foreach($errors->all() as $error)
                     <p>{{$error}}</p>
@@ -31,7 +31,7 @@
                 </form>
 
             </div>
-            <div class="col-md-9 pt-lg-3 pb-3 right-container">
+            <div class="col-md-9 pt-3 px-5 right-container">
 
                 <!-- Search bar  -->
                 <form class="d-flex align-items-center ms-auto mb-3 border rounded-pill" id="search">
@@ -49,7 +49,6 @@
                         <th scope="col">Task Title</th>
                         <th scope="col">Description</th>
                         <th scope="col">Deadline</th>
-                        <th scope="col">Submissions</th>
                         <th scope="col">action</th>
                     </tr>
                     </thead>
@@ -62,7 +61,6 @@
                                 <td class="text-break">{{$task->task_title}}</td>
                                 <td class="text-break">{{$task->task_description}}</td>
                                 <td>{{$task->deadline}}</td>
-                                <td><a href="#">Check Submissions</a></td>
                                 <td class="mt-2">
                                     <div class="d-flex">
                                         <a href="{{url('/teacher/tasks/'.$task->id)}}" class="">

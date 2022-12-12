@@ -6,7 +6,7 @@
 
         <div class="row">
 
-            <div class="col-md-3 bg bg-light py-5 left-container">
+            <div class="col-md-3 bg bg-light pt-5 left-container full-height">
 
             <!-- Add group  -->
                 <form class="" action="/teacher/groups" method="POST">
@@ -21,7 +21,7 @@
                         <input type="text" class="form-control" name="topic_id" value="{{old('topic_id')}}">
                     </div>
 
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="exampleFormControlSelect1">Group Status</label>
                         <select name="group_status" class="form-control" id="exampleFormControlSelect1">
                             <option value={{true}}>Active</option>
@@ -29,14 +29,15 @@
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" value="">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirm_password">
+                    <div class="d-flex gap-2 mb-3">
+                        <div>
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" value="">
+                        </div>
+                        <div>
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" name="confirm_password">
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-info">Submit</button>
@@ -45,7 +46,7 @@
 
 
             </div>
-            <div class="col-md-9 bg py-3 right-container">
+            <div class="col-md-9 bg py-3 px-5 right-container">
 
                 <!-- Search bar  -->
                 <form class="d-flex align-items-center ms-auto mb-1 border rounded-pill" id="search">
