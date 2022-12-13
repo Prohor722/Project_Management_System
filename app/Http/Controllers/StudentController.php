@@ -64,8 +64,24 @@ class StudentController extends Controller
         $students = Student::paginate(5);
         $student = Student::where('student_id', $id)->first();
 
-        return $student;
-
         return view('admin.studentInfo',['students'=>$students, "student"=>$student]);
+    }
+
+    public function search(Request $request){
+
+        $txt = $request->searchText;
+
+        $search = Student::query()->where('student_id', 'LIKE', "%{$txt}%")
+        ->orWhere('student_name', 'LIKE', "%{$txt}%")
+        ->paginate(5);
+
+        $size = count($search);
+        $students = Student::paginate(5);
+
+        if($size>1){
+            return view('admin.studentList',['students'=>$search]);
+        }
+
+        return view('admin.studentInfo',['students'=>$students, 'student'=> $search[0]]);
     }
 }

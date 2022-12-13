@@ -25,18 +25,18 @@ class MarksController extends Controller
     public function update($id, Request $request)
     {
         $request->validate([
-            'po1'=>"required|max:2|gte:0",
-            'po2'=>"required|max:2|gte:0",
-            'po3'=>"required|max:2|gte:0",
-            'po4'=>"required|max:2|gte:0",
-            'po5'=>"required|max:2|gte:0",
-            'po6'=>"required|max:2|gte:0",
-            'po7'=>"required|max:2|gte:0",
-            'po8'=>"required|max:2|gte:0",
-            'po9'=>"required|max:2|gte:0",
-            'po10'=>"required|max:2|gte:0",
-            'po11'=>"required|max:2|gte:0",
-            'po12'=>"required|max:2|gte:0",
+            'po1'=>"required|max:99|gte:0",
+            'po2'=>"required|max:99|gte:0",
+            'po3'=>"required|max:99|gte:0",
+            'po4'=>"required|max:99|gte:0",
+            'po5'=>"required|max:99|gte:0",
+            'po6'=>"required|max:99|gte:0",
+            'po7'=>"required|max:99|gte:0",
+            'po8'=>"required|max:99|gte:0",
+            'po9'=>"required|max:99|gte:0",
+            'po10'=>"required|max:99|gte:0",
+            'po11'=>"required|max:99|gte:0",
+            'po12'=>"required|max:99|gte:0",
         ]);
         unset($request['_token'],$request['_method']);
         Marks::where('id', $id)->update($request->all());

@@ -13,6 +13,7 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::paginate(5);
+        // return $teachers;
         return view('admin.teachers',["teachers"=>$teachers]);
     }
 
@@ -86,5 +87,28 @@ class TeacherController extends Controller
         $teacher = Teacher::where('t_id',$id)->first();
 
         return view('admin.teacherInfo',['teachers'=>$teachers, 'teacher'=>$teacher]);
+    }
+
+    public function search(Request $request){
+
+        $txt = $request->searchText;
+
+        $search = Teacher::query()->where('t_id', 'LIKE', "%{$txt}%")
+        ->orWhere('t_name', 'LIKE', "%{$txt}%")
+        ->paginate(5)->withQueryString();
+
+        // $search = Teacher::where('t_name', $txt)->paginate(5);
+
+        $size = count($search);
+        // return $size;
+        $teachers = Teacher::paginate(5);
+
+        // return $teachers;
+
+        if($size>1){
+            return view('admin.teachers',['teachers'=>$search]);
+        }
+
+        return view('admin.teacherInfo',['teachers'=>$teachers, 'teacher'=> $search[0]]);
     }
 }

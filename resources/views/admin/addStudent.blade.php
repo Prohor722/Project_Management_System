@@ -12,7 +12,7 @@
         <div class="row">
 
             <!-- Student Information section  -->
-            <div class="col-md-3 d-flex bg-light flex-column align-items-center px-3 py-4 short-text">
+            <div class="col-md-3 d-flex bg-light flex-column align-items-center px-3 py-4 full-height">
                 <img id="info-img" class="my-4 pt-4 w-50" src="{{asset('images/users/student.jpg')}}">
                 <h4>Students Information</h4>
                 <h6 class="mt-3">Name: <span id="student-name">Full Name</span></h6>

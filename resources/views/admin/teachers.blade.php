@@ -39,8 +39,11 @@
                 </a>
 
                 <!-- Search bar  -->
-                <form class="d-flex align-items-center ms-auto mb-4 w-50 border rounded-pill" id="search">
-                    <input class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
+                <form action="/admin/teacher/search" method="post"
+                class="d-flex align-items-center ms-auto mt-3 mb-4 w-50 border rounded-pill" id="search">
+                    @csrf
+                    <input name="searchText" class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
+
                     <button class="btn border-0 p-0" id="search-icon" type="submit">
                         <img src="{{asset('/icons/search.svg')}}"
                         alt="search-icon" style="height:18px; padding-bottom: 2px" />

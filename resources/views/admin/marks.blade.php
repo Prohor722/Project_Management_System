@@ -7,7 +7,7 @@
         <div class="row d-flex align-items-center">
 
             <!-- Update Marks -->
-            <div class="col-md-4 bg-light px-4 pb-1 border full-height">
+            <div class="col-md-6 bg-light px-4 pb-1 border full-height">
                 <h5 class="mb-3 text-center mt-4">Update</h5>
                 <hr/>
                 <form class="" action="/admin/marks/{{$marks->id}}" method="POST">
@@ -44,9 +44,6 @@
                                 <p class="text-danger mt-1">{{$message}}</p>
                                 @enderror
                         </div>
-                    </div>
-
-                    <div class="d-flex gap-3 mb-3">
                         <div>
                             <label for="po4" class="form-label @error('po4') text-danger @enderror">po4</label>
                             <input type="number" name="po4" class="form-control
@@ -58,6 +55,9 @@
                                 <p class="text-danger mt-1 text-break">{{$message}}</p>
                                 @enderror
                         </div>
+                    </div>
+
+                    <div class="d-flex gap-3 mb-3">
                         <div>
                             <label for="po5" class="form-label @error('po5') text-danger @enderror" >po5</label>
                             <input type="number" name="po5" class="form-control
@@ -76,8 +76,7 @@
                                 <p class="text-danger mt-1">{{$message}}</p>
                                 @enderror
                         </div>
-                    </div>
-                    <div class="d-flex gap-3 mb-3">
+
                         <div>
                             <label for="po7" class="form-label @error('po7') text-danger @enderror" >po7</label>
                             <input type="number" name="po7" class="form-control
@@ -96,6 +95,10 @@
                                 <p class="text-danger mt-1">{{$message}}</p>
                                 @enderror
                         </div>
+                    </div>
+
+                    <div class="d-flex gap-3 mb-3">
+
                         <div>
                             <label for="po9" class="form-label @error('po9') text-danger @enderror" >po9</label>
                             <input type="number" name="po9" class="form-control
@@ -105,9 +108,6 @@
                                 <p class="text-danger mt-1">{{$message}}</p>
                                 @enderror
                         </div>
-                    </div>
-
-                    <div class="d-flex gap-3 mb-3">
                         <div>
                             <label for="po10" class="form-label @error('po10') text-danger @enderror" >po10</label>
                             <input type="number" name="po10" class="form-control
@@ -144,9 +144,9 @@
             </div>
 
             <!-- Marks list  -->
-            <div class="col-md-8 px-4">
+            <div class="col-md-6 px-4">
                 <h5 class="text-center p-2 bg-dark text-white">Marks</h5>
-                <table class="table pb-5 mb-3 table-striped">
+                <table class="table pb-5 mb-3 table-striped table-bordered">
                     <thead>
                         <tr class="border">
                             <th scope="col">po1</th>

@@ -30,10 +30,12 @@ Route::middleware(['admin'])->group(function () {
     //students
     Route::resource('/admin/student', StudentController::class);
     Route::get('/admin/student/info/{student_id}', [StudentController::class, 'studentInfo']);
+    Route::post('/admin/student/search', [StudentController::class, 'search']);
 
     //teachers
     Route::resource('/admin/teacher', TeacherController::class);
     Route::get('/admin/teacher/info/{t_id}',[ TeacherController::class, 'teacherInfo']);
+    Route::post('/admin/teacher/search', [TeacherController::class, 'search']);
 
     //marks
     Route::get('/admin/marks', [MarksController::class, 'index'])->name('admin-marks');
