@@ -35,7 +35,7 @@
             </div>
 
 
-            <div class="col-md-9 px-5 mt-5 ">
+            <div class="col-md-9 px-5 ">
 
                 <!-- Add Student  -->
                 <form action="{{url('/admin/student')}}" method="POST">

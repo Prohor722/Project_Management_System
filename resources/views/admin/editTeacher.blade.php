@@ -11,7 +11,7 @@
 <div class="container-fluid">
     <div class="row">
         <!-- Teacher Information section  -->
-        <div class="col-md-3 d-flex bg-light flex-column align-items-center px-3 py-4 short-text">
+        <div class="col-md-3 d-flex bg-light flex-column align-items-center px-3 py-4 full-height">
             <img id="info-img" class="my-4 pt-4 w-50" src="{{asset('/images/users/Teacher.jpg')}}">
             <h4>Teacher's Information</h4>
             <h6 class="mt-3">Name: <span id="t_name">{{$teacher->t_name}}</span></h6>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="col-md-9 px-5 mt-5">
+        <div class="col-md-9 px-5 mt-4">
 
             <form  action="/admin/teacher/{{$teacher->id}}" method="POST">
                 <div class="d-flex flex-column align-items-center justify-content-center">

@@ -6,7 +6,7 @@
 
         {{-- Marks Table  --}}
         <div class="border border-secondary my-3 mx-4">
-            <div class="text-center bg-info py-1">
+            <div class="text-center bg-info py-1 border-bottom border-secondary">
                 <h6 class="mb-0">Marks</h6>
             </div>
                 <table class="table mb-0 table-striped table-bordered">
