@@ -26,6 +26,8 @@ Route::get('/admin/create', [LoginController::class,'admin']);
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [AdminController::class,'index'])->name('admin.index');
+    Route::get('/admin/profile', [AdminController::class, 'show']);
+    Route::put('/admin/profile/update', [AdminController::class, 'update']);
 
     //students
     Route::resource('/admin/student', StudentController::class);
@@ -49,8 +51,12 @@ Route::middleware(['teacher'])->group(function () {
 
     Route::get('/teacher', function(){
         return view('teacher.index');
-    })->name('teacher.index')->middleware('user','teacher');
-    Route::view('/teacher/studentList', 'teacher.studentList')->name('teacher-student-list');
+    })->name('teacher.index');
+
+    //teacher profile
+    Route::get('/teacher/profile', [TeacherController::class, 'showProfile']);
+    Route::put('/teacher/profile/update', [TeacherController::class, 'updateProfile']);
+    // Route::view('/teacher/studentList', 'teacher.studentList')->name('teacher-student-list');
 
     //groups
     Route::resource('/teacher/groups', GroupController::class);

@@ -63,7 +63,7 @@ class LoginController extends Controller
                 $access = Hash::make($user->t_id.$role."prohor_banik");
                 session(["user_id"=>$user->t_id, "role"=>$role, "access_token"=>$access]);
 
-                return redirect()->route('teacher.index');
+                return redirect('/teacher/groups');
             }
         }
         else if($role == 'student'){

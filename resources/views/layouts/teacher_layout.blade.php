@@ -16,7 +16,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/teacher">
+            <a class="navbar-brand" href="/teacher/groups">
                 <img src="{{asset('images/logo/logo.png')}}" alt="Logo" height="50">
             </a>
 
@@ -31,7 +31,7 @@
                             <img src="{{asset('images/users/Teacher.jpg')}}" class="rounded-circle border border-3 border-primary" height="50" alt="" srcset="">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{url('/teacher/profile')}}">Profile</a></li>
                             <li><a class="dropdown-item" href="{{route('logout.index')}}">Log out</a></li>
                         </ul>
                     </li>

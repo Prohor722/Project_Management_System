@@ -111,4 +111,39 @@ class TeacherController extends Controller
 
         return view('admin.teacherInfo',['teachers'=>$teachers, 'teacher'=> $search[0]]);
     }
+
+
+    //Teacher Profile Control
+    public function showProfile()
+    {
+        $teacher = Teacher::get()->first();
+        return view('teacher.profile', ["teacher"=>$teacher]);
+    }
+    public function updateProfile(Request $request)
+    {
+        $id = $request->session()->get('user_id');
+
+        $request->validate([
+            't_name'=>'required',
+            'email'=>"required|email",
+            'password'=>"required|min:4",
+            'update_password'=>"nullable|min:4"
+        ]);
+
+        $teacher = Teacher::where('t_id', $id)
+        ->where('password',$request->password)->first();
+
+        if($request->update_password){
+            $request['password'] = $request->update_password;
+        }
+
+        if($teacher){
+            unset($request['update_password'],$request['_method'],$request['_token']);
+            Teacher::where('t_id', $id)->update($request->all());
+            return redirect('/teacher/profile');
+        }
+
+        $request->session()->flash('msg', 'invalid username/password');
+        return redirect('/teacher/profile');
+    }
 }
