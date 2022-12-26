@@ -6,6 +6,7 @@ use App\Models\GroupStudent;
 use App\Models\Group;
 use App\Models\GroupLink;
 use App\Models\Student;
+use App\Models\StudentMark;
 use Illuminate\Http\Request;
 
 class GroupStudentController extends Controller
@@ -28,6 +29,11 @@ class GroupStudentController extends Controller
         ]);
 
         GroupStudent::create(['group_id'=>$group_id, 'student_id'=>$request->student_id]);
+
+        // $studentExists = StudentMark::where('student_id',$request->student_id )->first();
+        // if(!$studentExists){
+        //     StudentMark::create(['student_id'=>$request->student_id]);
+        // }
         return redirect('/teacher/group/manage/'.$group_id);
     }
     public function destroy($id)

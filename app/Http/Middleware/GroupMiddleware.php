@@ -11,7 +11,7 @@ class GroupMiddleware
     {
         $role = $request->session()->get('role');
 
-        if($role=="group"){
+        if($role=="student"){
             return $next($request);
         }
 

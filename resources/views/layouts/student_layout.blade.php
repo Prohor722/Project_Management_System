@@ -27,23 +27,22 @@
                 <ul class="navbar-nav mb-2 mb-lg-0 ms-auto me-5 d-flex justify-content-center align-items-center">
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link" href="/student" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{asset('images/users/student.jpg')}}" class="rounded-circle border border-3 border-primary" height="50" alt="" srcset="">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="/student/change-password">Change Password</a></li>
                             <li><a class="dropdown-item" href="{{route('logout.index')}}">Log out</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('student-tasks')}}">
-                            Tasks
-                        </a>
+                        <a class="nav-link" href="{{url('/student')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('student-notice')}}">
-                            Notice
-                        </a>
+                        <a class="nav-link" href="{{route('student-tasks')}}">Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/student/result')}}">Results</a>
                     </li>
                 </ul>
             </div>

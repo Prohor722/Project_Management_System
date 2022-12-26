@@ -200,11 +200,12 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     @foreach ($studentDetails as $student)
                     <?php $marks=$student->student_marks; ?>
-                    @if($marks)
-                        <tr class="border">
-                            <td>{{$student->student_id}}</td>
+                    <tr class="border">
+                        <td>{{$student->student_id}}</td>
+                        @if($marks)
                             <td>{{$marks->po1}}</td>
                             <td>{{$marks->po2}}</td>
                             <td>{{$marks->po3}}</td>
@@ -223,8 +224,13 @@
                                     <button type="submit" class="btn btn-success">Update</button>
                                 </a>
                             </td>
-                        </tr>
+                        @else
+                            <?php $i=1 ?>
+                            @for ($i;$i<=13;$i++)
+                                <td>0</td>
+                            @endfor
                         @endif
+                        </tr>
                     @endforeach
 
                 </tbody>

@@ -10,7 +10,7 @@ class NoticeController extends Controller
     public function index(Request $request)
     {
         $id = $request->session()->get('user_id');
-        $notices = Notice::where('t_id',$id)->paginate(5);
+        $notices = Notice::where('t_id',$id)->orderBy('updated_at', 'desc')->paginate(5);
         return view('teacher.notice',['notices'=>$notices]);
     }
 

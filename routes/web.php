@@ -85,9 +85,13 @@ Route::middleware(['teacher'])->group(function () {
 
 Route::middleware(['group'])->group(function () {
 
-    Route::get('/student', 'App\Http\Controllers\StudentController@index')->name('student.index');
-    Route::view('/student/notice', 'group.notice')->name('student-notice');
-    Route::view('/student/tasks', 'group.notice')->name('student-tasks');
+    Route::get('/student', [GroupController::class, 'studentIndex']);
+    Route::get('/student/tasks',[GroupController::class, 'studentTasks'])->name('student-tasks');
+    Route::get('/student/result',[GroupController::class, 'studentResult']);
+    Route::get('/student/task/{id}',[GroupController::class, 'studentTask']);
+    Route::post('/student/task/{id}',[GroupController::class, 'studentTaskSubmit']);
+    Route::get('/student/change-password',[GroupController::class, 'studentChangePass']);
+    Route::post('/student/changePassword',[GroupController::class, 'studentPassUpdate']);
 });
 
 //--------------  Test Routes -------------

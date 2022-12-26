@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('task_title');
+            $table->string('t_id');
+            $table->foreign('t_id')->references('t_id')->on('teachers')->cascadeOnUpdate();
             $table->string('task_description');
             $table->string('deadline');
             $table->timestamps();

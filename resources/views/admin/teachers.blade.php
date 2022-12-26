@@ -7,26 +7,36 @@
     <div class="row">
 
         <!-- Teacher Information Section  -->
-        <div class="col-md-3 bg-light d-flex flex-column align-items-center p-3 full-height">
-            <img id="info-img" class="mb-3 mt-5 w-50" src="{{asset('/images/users/Teacher.jpg')}}">
-            <h3>Teacher's Information</h3>
-            <h6 class="mt-3">Name: <span id="student-name">Roktakin ahmed jobin bhuiyan</span></h6>
-            <div>
-                <h6 class="mt-3 d-inline">Status: </h6>
-                <span id="student-name" class="text-success">Active</span>
+        <div class="col-md-3 bg-light p-3 full-height">
+
+            @if(!session('msg'))
+            <div class=" d-flex flex-column align-items-center">
+                <img id="info-img" class="mb-3 mt-5 w-50" src="{{asset('/images/users/Teacher.jpg')}}">
+                <h3>Teacher's Information</h3>
+                <h6 class="mt-3">Name: <span id="student-name">XXX</span></h6>
+                <div>
+                    <h6 class="mt-3 d-inline">Status: </h6>
+                    <span id="student-name" class="text-success">Active/In-Active</span>
+                </div>
+                <div>
+                    <h6 class="mt-3 d-inline">INS ID: </h6>
+                    <span id="student-name">XXX</span>
+                </div>
+                <div>
+                    <h6 class="mt-3 d-inline">Department: </h6>
+                    <span id="student-name">CSE</span>
+                </div>
+                <div>
+                    <h6 class="mt-3 d-inline">Email: </h6>
+                    <span id="student-name">XXX@sub.edu.bd</span>
+                </div>
             </div>
+            @else
             <div>
-                <h6 class="mt-3 d-inline">INS ID: </h6>
-                <span id="student-name">CS-0245158</span>
+                <p class="mt-5 alert alert-danger">{{session('msg')}}</p>
             </div>
-            <div>
-                <h6 class="mt-3 d-inline">Department: </h6>
-                <span id="student-name">CSE</span>
-            </div>
-            <div>
-                <h6 class="mt-3 d-inline">Email: </h6>
-                <span id="student-name">Roktakin.ahmed@sub.edu.bd</span>
-            </div>
+
+            @endif
         </div>
 
 

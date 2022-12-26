@@ -11,7 +11,7 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $id = $request->session()->get('user_id');
-        $tasks = Task::paginate(5);
+        $tasks = Task::where('t_id', $id)->paginate(5);
         return view('teacher.tasks',['tasks'=>$tasks]);
     }
     public function create()
@@ -21,11 +21,15 @@ class TaskController extends Controller
     public function store(Request $request)
     {
 
+        $id = $request->session()->get('user_id');
+
         $request->validate([
             'task_title'=>"required",
             'task_description'=>"required",
             'deadline'=>"required",
         ]);
+
+        $request['t_id'] = $id;
 
         Task::create($request->all());
         return redirect('/teacher/tasks');
@@ -51,7 +55,7 @@ class TaskController extends Controller
         $task->update($request->all());
         return redirect('/teacher/tasks');
     }
-    public function destroy(Task $task)
+    public function destroy(Task $task, Request $request)
     {
         $groupLinkExists = GroupLink::where('task_id',$task->id)->first();
 

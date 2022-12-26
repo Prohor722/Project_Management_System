@@ -2,12 +2,12 @@
 
 @section('admin_content')
 
-    <div class="container-fluid">
+    <div class="container-fluid mt-5">
 
         {{-- Marks Table  --}}
         <div class="border border-secondary my-3 mx-4">
-            <div class="text-center bg-info py-1 border-bottom border-secondary">
-                <h6 class="mb-0">Marks</h6>
+            <div class="text-center bg-light py-1 border-bottom border-secondary">
+                <h6 class="mb-0">Marks Setup</h6>
             </div>
                 <table class="table mb-0 table-striped table-bordered">
                     <thead>
@@ -51,9 +51,9 @@
         <div class="border border-secondary mt-5 mb-3 mx-4">
 
             <!-- Update Marks -->
-            <h6 class="text-center py-1 mb-0 bg-info border-bottom border-secondary">Update</h6>
+            <h6 class="text-center py-1 mb-0 bg-light border-bottom border-secondary">Update</h6>
 
-            <form class="p-2 bg-light" action="/admin/marks/{{$marks->id}}" method="POST">
+            <form class="p-2" action="/admin/marks/{{$marks->id}}" method="POST">
                 @method('put')
                 @csrf
 

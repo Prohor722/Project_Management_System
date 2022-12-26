@@ -62,7 +62,7 @@
 
 
             <div class="col-md-4 px-4 pt-5">
-                <h4 class="mb-3 text-center">Group Members</h4>
+                <h4 class="mb-3 text-center">Group Submissions</h4>
                 <table class="table table-hover">
                     <thead>
                     <tr class="border">
@@ -77,7 +77,10 @@
                         <tr class="border">
                             <td>{{++$i}}</td>
                             <td>{{$link->task_id}}</td>
-                            <td><a href='{{$link->link}}' target="_blank">Check</a></td>
+                            <td>
+                                {{-- <a href='{{$link->link}}' target="_blank">Check</a> --}}
+                                <a href="{{asset('storage/'.$link->link)}}" download="{{asset('storage/'.$link)}}" target="_blank">Download</a>
+                            </td>
                         </tr>
                     @endforeach
 

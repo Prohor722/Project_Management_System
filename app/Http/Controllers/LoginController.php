@@ -70,11 +70,11 @@ class LoginController extends Controller
             $user = DB::table('groups')->where('group_id', $req->user_id)
                         ->where('password', $req->password)
                         ->first();
-            if($user && $user->student_id == $req->user_id){
-                $access = Hash::make($user->student_id.$role."prohor_banik");
-                session(["user_id"=>$user->student_id, "role"=>$role, "access_token"=>$access]);
+            if($user && $user->group_id == $req->user_id){
+                $access = Hash::make($user->group_id.$role."prohor_banik");
+                session(["user_id"=>$user->group_id, "role"=>$role, "access_token"=>$access]);
 
-                return redirect()->route('group.index');
+                return redirect('/student');
             }
         }
 		$req->session()->flash('msg', 'invalid username/password');

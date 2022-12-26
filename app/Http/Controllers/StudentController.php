@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\StudentMark;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -54,8 +55,14 @@ class StudentController extends Controller
         $student->update($request->all());
         return redirect('/admin/student');
     }
-    public function destroy(Student $student)
+    public function destroy(Student $student, Request $request)
     {
+        $dataExists = StudentMark::where('student_id',$student->student_id)->first();
+
+        if($dataExists){
+            $request->session()->flash('msg', $student->student_id.' contains data, can not be deleted');
+            return redirect("/admin/student");
+        }
         $student->delete();
         return redirect("/admin/student");
     }

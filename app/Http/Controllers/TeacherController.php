@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Teacher;
+use App\Models\Group;
 use App\Models\Login;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -75,8 +76,15 @@ class TeacherController extends Controller
         return redirect('/admin/teacher');
     }
 
-    public function destroy(Teacher $teacher)
+    public function destroy(Teacher $teacher, Request $request)
     {
+        $dataExists = Group::where('t_id',$teacher->t_id)->first();
+
+        if($dataExists){
+            $request->session()->flash('msg','This '.$teacher->t_id.' contains groups under him/her.');
+            return redirect('/admin/teacher');
+        }
+
         $teacher->delete();
         return redirect('/admin/teacher');
     }

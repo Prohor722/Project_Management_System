@@ -13,13 +13,17 @@ class StudentMarkController extends Controller
     public function index($id)
     {
         $groupStudents = GroupStudent::where('group_id',$id)->get();
-        $studentDetails;
+        $studentDetails=[];
         $i= 0;
-        foreach ($groupStudents as $group_student) {
-            $student_id = $group_student->student_id;
-            $student = Student::where('student_id',$student_id)->with('student_marks')->get();
-            $studentDetails[$i] = $student[0];
-            $i++;
+
+        if($groupStudents){
+
+            foreach ($groupStudents as $group_student) {
+                $student_id = $group_student->student_id;
+                $student = Student::where('student_id',$student_id)->with('student_marks')->get();
+                $studentDetails[$i] = $student[0];
+                $i++;
+            }
         }
 
         $marks = Marks::get()->first();

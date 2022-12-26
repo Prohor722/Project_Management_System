@@ -7,16 +7,23 @@
     <div class="row full-height">
 
         <!-- Student Information section  -->
-        <div class="col-md-3 bg-light d-flex flex-column align-items-center p-3">
-            <img id="info-img" class="mb-3 mt-5 w-50" src="{{asset('/images/users/student.jpg')}}">
-            <h3>Student's Information</h3>
-            <h6 class="mt-3">Name:</h6>
-            <div class="d-flex flex-col">
-                <h6 class="mt-3 d-inline">ID: </h6>
-                <h6 class="mt-3 d-inline">Department: </h6>
-                <h6 class="mt-3 d-inline">Email: </h6>
-                <h6 class="mt-3 d-inline">Status: </h6>
-            </div>
+        <div class="col-md-3 bg-light p-3">
+
+            @if(!session('msg'))
+                <div class=" d-flex flex-column align-items-center">
+                    <img id="info-img" class="mb-3 mt-5 w-50" src="{{asset('/images/users/student.jpg')}}">
+                    <h3>Student's Information</h3>
+                    <h6>Name:</h6>
+                    <h6>ID: </h6>
+                    <h6>Department: </h6>
+                    <h6>Email: </h6>
+                    <h6>Status: </h6>
+                </div>
+            @else
+                <div>
+                    <p class="mt-5 alert alert-danger">{{session('msg')}}</p>
+                </div>
+            @endif
         </div>
 
         <!-- Students Table -->
