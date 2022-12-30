@@ -76,11 +76,27 @@
             </div>
             <div class="col-md-9 bg py-3 px-5 right-container">
 
-                <!-- Search bar  -->
-                <form class="d-flex align-items-center ms-auto mb-1 border rounded-pill" id="search">
-                    <input class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn border-0 text-dark p-0" id="search-icon" type="submit"><i class="fas fa-search"></i></button>
-                </form>
+                <div class="d-flex align-items-center my-4">
+
+                    @isset($status)
+                        @if ($status)
+                        <a href="{{url('/teacher/groupsInActive')}}" class="btn border border-danger text-danger">In-Active Groups</a>
+                        @else
+                        <a href="{{url('/teacher/groups')}}" class="btn border border-success text-success">Active Groups</a>
+                        @endif
+                    @endisset
+
+                    <!-- Search bar  -->
+                    <form action="/teacher/groups/search" method="post" class="d-flex align-items-center ms-auto mb-1 border rounded-pill" id="search">
+                        @csrf
+                        <input placeholder="Search by ID" name="txt" class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
+
+                        <button class="btn border-0 p-0" id="search-icon" type="submit">
+                            <img src="{{asset('/icons/search.svg')}}"
+                            alt="search-icon" style="height:18px; padding-bottom: 2px" />
+                        </button>
+                    </form>
+                </div>
 
                 <!-- Group Table  -->
                 <table class="table table-hover">
@@ -90,7 +106,13 @@
                         <th scope="col">Group ID</th>
                         <th scope="col">Topic ID</th>
                         <th scope="col">Teacher's ID</th>
-                        <th scope="col">Group Status</th>
+                        <th scope="col">Status
+                            @isset($status)
+                                <span class={{$status? "text-success" : "text-danger"}}
+                                    style="font-size:14px">({{$status? "Active" : "In-Active"}})
+                                </span>
+                            @endisset
+                        </th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>

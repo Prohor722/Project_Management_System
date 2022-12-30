@@ -14,8 +14,9 @@ class GroupStudentController extends Controller
     public function index($group_id)
     {
         $groupStudents = GroupStudent::where('group_id',$group_id)->get();
-        $group_links = GroupLink::where('group_id',$group_id)->get();
+        $group_links = GroupLink::where('group_id',$group_id)->with('tasks')->get();
 
+        // return $group_links;
         return view('teacher.manageGroups',
         ['group_students'=>$groupStudents,
         'group_id'=>$group_id,

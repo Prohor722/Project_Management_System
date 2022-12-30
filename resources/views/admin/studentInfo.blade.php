@@ -59,7 +59,7 @@
                 <form action="/admin/student/search" method="post"
                 class="d-flex align-items-center ms-auto mt-3 mb-4 w-50 border rounded-pill" id="search">
                     @csrf
-                    <input name="searchText" class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
+                    <input name="searchText" placeholder="Search by ID or, Name" class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
 
                     <button class="btn border-0 p-0" id="search-icon" type="submit">
                         <img src="{{asset('/icons/search.svg')}}"

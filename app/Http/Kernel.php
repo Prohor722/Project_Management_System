@@ -79,5 +79,6 @@ class Kernel extends HttpKernel
         'teacher' => \App\Http\Middleware\TeacherMiddleware::class,
         'group' => \App\Http\Middleware\GroupMiddleware::class,
         'user' => \App\Http\Middleware\UserMiddleware::class,
+        'isActive' => \App\Http\Middleware\StatusChecker::class,
     ];
 }

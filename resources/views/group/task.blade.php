@@ -14,7 +14,7 @@
                         <p class="text-break">{{$task->task_description}}</p>
                         <strong class="my-3">Deadline: {{$task->deadline}}</strong>
                         @if ($link)
-                            <a href="{{asset('storage/'.$link)}}" download="{{asset('storage/'.$link)}}" target="_blank" class="btn btn-primary">Check Submission</a>
+                            <a href="{{asset('storage/'.$link)}}" download="{{$task->task_title}}" target="_blank" class="btn btn-primary">Check Submission</a>
                         @endif
                     </div>
                 </div>
@@ -27,25 +27,26 @@
                             @if (date('Y-m-d')>$task->deadline)
                                 <p class="alert alert-danger mt-5">Date expired</p>
                             @else
-                                <div class="row col-md-9 gy-0">
+                                <div class="row col-md-9 mt-5 gy-0">
                                     @csrf
                                     <label for="file" class="form-label">Upload File</label>
                                         <input type="file" name="file" class="form-control"
                                             id="file">
 
-                                    <div class="text-center mt-4">
+                                    {{-- <div class="text-center mt-4">
                                         <p>Or, give drive/any storage link</p>
                                     </div>
 
                                     <label for="link" class="form-label">URL Link</label>
                                         <input type="text" name="link" class="form-control"
-                                            id="link" value="{{old('link')}}">
+                                            id="link" value="{{old('link')}}"> --}}
 
                                     @if($link)
-
                                     <button type="submit" class="btn btn-success my-4 w-100">Update</button>
+
                                     @else
                                     <button type="submit" class="btn btn-secondary my-4 w-100">Submit</button>
+
                                     @endif
 
                                     @error('file')

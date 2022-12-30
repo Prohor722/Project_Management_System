@@ -76,10 +76,11 @@
                     @foreach($group_links as $link)
                         <tr class="border">
                             <td>{{++$i}}</td>
-                            <td>{{$link->task_id}}</td>
+                            <td>{{$link->tasks->task_title}}</td>
                             <td>
-                                {{-- <a href='{{$link->link}}' target="_blank">Check</a> --}}
-                                <a href="{{asset('storage/'.$link->link)}}" download="{{asset('storage/'.$link)}}" target="_blank">Download</a>
+                                <a href="{{asset('storage/'.$link->link)}}"
+                                    download="{{$link->group_id.'_task_id_'.$link->task_id}}"
+                                    target="_blank">Download</a>
                             </td>
                         </tr>
                     @endforeach

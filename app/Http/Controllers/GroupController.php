@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Models\GroupStudent;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\StudentMark;
 use App\Models\Notice;
 use App\Models\Task;
@@ -21,8 +22,28 @@ class GroupController extends Controller
     {
         $id = $request->session()->get('user_id');
 
-        $groups = Group::where('t_id', $id)->paginate(5);
-        return view('teacher/groups',["groups"=>$groups]);
+        $groups = Group::where('t_id', $id)->where('group_status', 1)->paginate(5);
+        return view('teacher/groups',["groups"=>$groups, "status"=>true]);
+    }
+
+    public function inActiveGroups(Request $request)
+    {
+        $id = $request->session()->get('user_id');
+
+        $groups = Group::where('t_id', $id)->where('group_status', Null)->paginate(5);
+        return view('teacher/groups',["groups"=>$groups, "status"=>false]);
+    }
+
+    public function groupSearch(Request $request){
+
+        $id = $request->session()->get('user_id');
+        $txt = $request->txt;
+
+        $search = Group::where('t_id', $id)
+        ->where('group_id', 'LIKE', "%{$txt}%")
+        ->paginate(5)->withQueryString();
+
+        return view('teacher/groups',["groups"=>$search]);
     }
 
     public function create()
@@ -39,7 +60,14 @@ class GroupController extends Controller
             'confirm_password'=>'required|same:password',
         ]);
 
-        $request['t_id']=$request->session()->get('user_id');
+        $id = $request->session()->get('user_id');
+        $teacher = Teacher::where('t_id', $id)->first();
+
+        if(!$teacher->status){
+            return back();
+        }
+
+        $request['t_id']= $id;
 
         Group::create($request->all());
 
@@ -48,7 +76,9 @@ class GroupController extends Controller
 
     public function show(Group $group, Request $request)
     {
-        $groups = Group::paginate(5);
+        $id = $request->session()->get('user_id');
+
+        $groups = Group::where('t_id', $id)->paginate(5);
         $request->session()->put('id', $group->id);
         return view('teacher.groupEdit',["groups"=>$groups, 'group'=>$group]);
     }
@@ -71,6 +101,12 @@ class GroupController extends Controller
             'confirm_password'=>"nullable|min:4"
         ]);
 
+        $t_id = $request->session()->get('user_id');
+        $teacher = Teacher::where('t_id', $t_id)->first();
+        if(!$teacher->status){
+            return back();
+        }
+
         $pass = $request->password ;
         $cpass = $request->confirm_password;
         $new_group_id = $request->group_id;
@@ -85,8 +121,14 @@ class GroupController extends Controller
     }
 
 
-    public function destroy(Group $group)
+    public function destroy(Group $group, Request $request)
     {
+        $id = $request->session()->get('user_id');
+        $teacher = Teacher::where('t_id', $id)->first();
+        if(!$teacher->status){
+            return back();
+        }
+
         $group->delete();
         return redirect('/teacher/groups');
     }
@@ -109,6 +151,7 @@ class GroupController extends Controller
         return view('group.index',['students'=>$students, 'notices'=>$notices]);
     }
 
+    //student all tasks list
     public function studentTasks(Request $request){
         $id = $request->session()->get('user_id');
         $group = Group::where('group_id',$id)->first();
@@ -118,6 +161,7 @@ class GroupController extends Controller
         return view('group.tasks',['tasks'=>$tasks]);
     }
 
+    //student single task details
     public function studentTask($id ,Request $request){
 
         $group_id = $request->session()->get('user_id');
@@ -128,6 +172,7 @@ class GroupController extends Controller
         return view('group.task',['task'=>$task, 'link'=>$group_link]);
     }
 
+    //student task submit
     public function studentTaskSubmit($id ,Request $request){
 
         $request->validate([
@@ -135,7 +180,7 @@ class GroupController extends Controller
         ]);
 
         if(!$request->link && !$request->file){
-            $request->session()->flash('msg', "Insert File or URL Link.");
+            $request->session()->flash('msg', "Upload File Required.");
             return redirect('/student/task/'.$id);
         }
 
@@ -168,6 +213,7 @@ class GroupController extends Controller
         return redirect('/student/task/'.$id);
     }
 
+    //group students result show
     public function studentResult(Request $request){
         $id = $request->session()->get('user_id');
         $groups = GroupStudent::where('group_id',$id)->get();
@@ -183,10 +229,12 @@ class GroupController extends Controller
         return view('group.result',['studentDetails'=>$studentMarks]);
     }
 
+    //Student Password Update page show by student
     public function studentChangePass(){
         return view('group.changePass');
     }
 
+    //Student Password Update by student
     public function studentPassUpdate(Request $request){
 
         $request->validate([
@@ -206,4 +254,5 @@ class GroupController extends Controller
         $request->session()->flash('msg', "Wrong Password Given!!");
         return redirect('/student/change-password');
     }
+
 }

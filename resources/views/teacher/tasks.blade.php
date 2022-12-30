@@ -44,13 +44,13 @@
                 </form>
 
             </div>
-            <div class="col-md-9 pt-3 px-5 right-container">
+            <div class="col-md-9 pt-3 mt-5 px-5 right-container">
 
                 <!-- Search bar  -->
-                <form class="d-flex align-items-center ms-auto mb-3 border rounded-pill" id="search">
+                {{-- <form class="d-flex align-items-center ms-auto mb-3 border rounded-pill" id="search">
                     <input class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn border-0 text-dark p-0" id="search-icon" type="submit"><i class="fas fa-search"></i></button>
-                </form>
+                </form> --}}
 
                 <!-- students list  -->
 

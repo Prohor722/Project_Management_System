@@ -49,28 +49,25 @@ Route::middleware(['admin'])->group(function () {
 
 Route::middleware(['teacher'])->group(function () {
 
-    Route::get('/teacher', function(){
-        return view('teacher.index');
-    })->name('teacher.index');
-
     //teacher profile
     Route::get('/teacher/profile', [TeacherController::class, 'showProfile']);
-    Route::put('/teacher/profile/update', [TeacherController::class, 'updateProfile']);
-    // Route::view('/teacher/studentList', 'teacher.studentList')->name('teacher-student-list');
+    Route::put('/teacher/profile/update', [TeacherController::class, 'updateProfile'])->middleware('isActive');
 
     //groups
     Route::resource('/teacher/groups', GroupController::class);
+    Route::get('/teacher/groupsInActive', [GroupController::class, 'inActiveGroups']);
+    Route::post('/teacher/groups/search', [GroupController::class, 'groupSearch']);
 
     //manage groupstudents
     Route::get('/teacher/group/manage/{id}', [GroupStudentController::class, 'index']);
-    Route::post('/teacher/group/manage/{id}', [GroupStudentController::class, 'addStudent']);
-    Route::delete('/teacher/group/manage/{id}', [GroupStudentController::class, 'destroy']);
+    Route::post('/teacher/group/manage/{id}', [GroupStudentController::class, 'addStudent'])->middleware('isActive');
+    Route::delete('/teacher/group/manage/{id}', [GroupStudentController::class, 'destroy'])->middleware('isActive');
 
     //manage student marks
     Route::get('/teacher/group/manage/marks/{group_id}', [StudentMarkController::class, 'index']);
-    Route::post('/teacher/group/student/mark/add', [StudentMarkController::class, 'addMark']);
-    Route::get('/teacher/group/student/mark/update/{student_id}', [StudentMarkController::class, 'show']);
-    Route::put('/teacher/group/student/mark/update/{student_id}', [StudentMarkController::class, 'update']);
+    Route::post('/teacher/group/student/mark/add', [StudentMarkController::class, 'addMark'])->middleware('isActive');
+    Route::get('/teacher/group/student/mark/update/{student_id}', [StudentMarkController::class, 'show'])->middleware('isActive');
+    Route::put('/teacher/group/student/mark/update/{student_id}', [StudentMarkController::class, 'update'])->middleware('isActive');
 
     //Topic
     Route::resource('/teacher/topic', TopicController::class);
@@ -89,9 +86,9 @@ Route::middleware(['group'])->group(function () {
     Route::get('/student/tasks',[GroupController::class, 'studentTasks'])->name('student-tasks');
     Route::get('/student/result',[GroupController::class, 'studentResult']);
     Route::get('/student/task/{id}',[GroupController::class, 'studentTask']);
-    Route::post('/student/task/{id}',[GroupController::class, 'studentTaskSubmit']);
-    Route::get('/student/change-password',[GroupController::class, 'studentChangePass']);
-    Route::post('/student/changePassword',[GroupController::class, 'studentPassUpdate']);
+    Route::post('/student/task/{id}',[GroupController::class, 'studentTaskSubmit'])->middleware('isActive');
+    Route::get('/student/change-password',[GroupController::class, 'studentChangePass'])->middleware('isActive');
+    Route::post('/student/changePassword',[GroupController::class, 'studentPassUpdate'])->middleware('isActive');
 });
 
 //--------------  Test Routes -------------

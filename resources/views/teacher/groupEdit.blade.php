@@ -80,9 +80,14 @@
             <div class="col-md-9 bg px-5 pt-3 right-container">
 
                 <!-- Search bar  -->
-                <form class="d-flex align-items-center ms-auto border rounded-pill mb-1" id="search">
-                    <input class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn border-0 text-dark p-0" id="search-icon" type="submit"><i class="fas fa-search"></i></button>
+                <form action="/teacher/groups/search" method="post" class="d-flex align-items-center ms-auto mb-1 border rounded-pill" id="search">
+                    @csrf
+                    <input placeholder="Search by ID" name="txt" class="form-control me-2 rounded-pill border-0" type="search" placeholder="Search" aria-label="Search">
+
+                    <button class="btn border-0 p-0" id="search-icon" type="submit">
+                        <img src="{{asset('/icons/search.svg')}}"
+                        alt="search-icon" style="height:18px; padding-bottom: 2px" />
+                    </button>
                 </form>
 
                 <!-- Group Table  -->
